@@ -1,0 +1,28 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AppStudio.Controls"
+    xmlns:html2xaml="using:AppStudio.Controls.Html2Xaml"
+    xmlns:commands="using:AppStudio.Commands"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps">
+
+    <!-- HtmlList -->
+    <DataTemplate x:Key="HtmlList">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+             <RichTextBlock html2xaml:Properties.Html="{Binding Items[0].Content}" Margin="0,0,15,0" Style="{StaticResource RichDescriptionStyle}"/>
+        </ScrollViewer>
+    </DataTemplate>
+
+    <!-- HtmlItem -->
+    <DataTemplate x:Key="HtmlItem">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+            <RichTextBlock html2xaml:Properties.Html="{Binding Content}" Margin="0,0,15,0" Style="{StaticResource RichDescriptionStyle}"/>
+        </ScrollViewer>
+    </DataTemplate>
+
+    <!-- Map -->
+    <DataTemplate x:Key="Map">
+        <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,10"/>
+    </DataTemplate>
+</ResourceDictionary>

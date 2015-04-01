@@ -1,0 +1,22 @@
+{
+  "Items": [
+    {
+      "Type": "Section",
+      "Title": "new events",
+      "Icon": "/Assets/DataImages/MenuClock1.png",
+      "Target": "StartersPage"
+    },
+    {
+      "Type": "Section",
+      "Title": "friends",
+      "Icon": "/Assets/DataImages/Item-5b7e62bf-29b9-4305-a5e3-cf2f06db3d5d.png",
+      "Target": "Main1Page"
+    },
+    {
+        "Type": "Section",
+        "Title": "dialogs",
+        "Icon": "/Assets/DataImages/MenuDialog1.png",
+        "Target": "DessertsPage"
+    }
+  ]
+}

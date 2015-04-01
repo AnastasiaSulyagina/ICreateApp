@@ -1,0 +1,91 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AppStudio.Controls"
+    xmlns:html2xaml="using:AppStudio.Controls.Html2Xaml"
+    xmlns:commands="using:AppStudio.Commands">
+
+    <!-- ListBigPictures -->
+    <DataTemplate x:Key="Section2List">
+        <Grid>
+            <ListView ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"  commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     ItemTemplate="{StaticResource Section2Item}">
+            </ListView>
+            <ProgressBar Height="40" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ProgressBarVisibility}" />
+        </Grid>
+    </DataTemplate>
+
+    <!-- ListBigPictures Item -->
+    <DataTemplate x:Key="Section2Item">
+        <Grid Margin="0,0,0,10" Height="220">
+            <Grid.Background>
+                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.Background>
+                    <SolidColorBrush Color="{StaticResource BoxBackgroundColor}" Opacity="0.8"/>
+                </Grid.Background>
+                <Rectangle Width="900" Height="0"/>
+                <Grid Margin="12,5,12,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2" />
+                    <TextBlock Grid.Row="1" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding Subtitle}"/>                    
+                </Grid>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
+
+
+
+    <!-- DetailMultiColumn -->
+    <DataTemplate x:Key="View1DetailDetail">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+            <StackPanel>
+                <TextBlock Text="{Binding Title}" Style="{StaticResource PageTitleStyle}"/>
+                <Button Margin="0,12,0,0" Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top"
+                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <Image Source="{Binding Image}" Stretch="UniformToFill"/>
+                    </Viewbox>
+                </Button>
+                <RichTextBlock Margin="0,12,0,0"  Style="{StaticResource RichDescriptionStyle}" html2xaml:Properties.Html="{Binding Subtitle}" html2xaml:Properties.ContainsCrlf="True" />
+            </StackPanel>
+        </ScrollViewer>
+    </DataTemplate>
+    <!-- DetailMultiColumn -->
+    <DataTemplate x:Key="View2DetailDetail">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+            <StackPanel>
+                <TextBlock Text="starters" Style="{StaticResource PageTitleStyle}"/>
+                <RichTextBlock Margin="0,12,0,0"  Style="{StaticResource RichDescriptionStyle}" html2xaml:Properties.Html="{Binding starter1}" html2xaml:Properties.ContainsCrlf="True" />
+            </StackPanel>
+        </ScrollViewer>
+    </DataTemplate>
+    <!-- DetailMultiColumn -->
+    <DataTemplate x:Key="View3DetailDetail">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+            <StackPanel>
+                <TextBlock Text="main" Style="{StaticResource PageTitleStyle}"/>
+                <RichTextBlock Margin="0,12,0,0"  Style="{StaticResource RichDescriptionStyle}" html2xaml:Properties.Html="{Binding main1}" html2xaml:Properties.ContainsCrlf="True" />
+            </StackPanel>
+        </ScrollViewer>
+    </DataTemplate>
+    <!-- DetailMultiColumn -->
+    <DataTemplate x:Key="View4DetailDetail">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+            <StackPanel>
+                <TextBlock Text="desserts" Style="{StaticResource PageTitleStyle}"/>
+                <RichTextBlock Margin="0,12,0,0"  Style="{StaticResource RichDescriptionStyle}" html2xaml:Properties.Html="{Binding dessert1}" html2xaml:Properties.ContainsCrlf="True" />
+            </StackPanel>
+        </ScrollViewer>
+    </DataTemplate>
+</ResourceDictionary>
