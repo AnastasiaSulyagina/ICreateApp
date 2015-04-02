@@ -11,6 +11,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Comment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Event.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ServerAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\ActionCommands.cs" />
@@ -49,9 +53,15 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\ApplicationBar.Delete.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\ApplicationBar.Select.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\list.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\location.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\map.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuClock1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuDialog1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuExit1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\search.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ErrorImage.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>

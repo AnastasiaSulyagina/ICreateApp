@@ -40,9 +40,9 @@
                 <AppBarButton x:Uid="AboutButton" Label="about" Command="{Binding MainViewModel.AboutCommand}"/>
                 <AppBarButton x:Uid="PrivacyButton" Label="privacy" Command="{Binding MainViewModel.PrivacyCommand}"/>
             </CommandBar.SecondaryCommands>
-            <AppBarButton x:Uid="AddEventButton" Icon="Add" DataContext="{Binding MainViewModel.SelectedItem}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}"/>
-            <AppBarButton x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}"/>
-            <AppBarButton x:Uid="LogOutButton" Icon="BlockContact" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}"/>
+            <AppBarButton x:Uid="AddEventButton" Icon="Add" DataContext="{Binding MainViewModel.SelectedItem}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}" Label="создать"/>
+            <AppBarButton x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="настройки"/>
+            <AppBarButton x:Uid="LogOutButton" Icon="BlockContact" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="выход"/>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
