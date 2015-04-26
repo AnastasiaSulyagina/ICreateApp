@@ -216,10 +216,6 @@ namespace AppStudio.ViewModels
         //
         // ICommands
         //
-        public ICommand TextToSpeechCommand
-        {
-            get { return new DelegateCommand(TextToSpeech); }
-        }
 
         public ICommand PinToStartCommand
         {

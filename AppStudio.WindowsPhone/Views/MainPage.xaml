@@ -21,28 +21,28 @@
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
+        
         <Rectangle Height="70" Width="1080" Fill="{StaticResource AppBarForeground}"></Rectangle>
-        <Hub x:Name="Container" Grid.Row="1" Margin="0,30,0,0" DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeader}" SectionsInViewChanged="OnSectionsInViewChanged">
-            <HubSection x:Name="MenuSection" Width="360" Header="меню" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section1Model}"
+        <Hub x:Name="Container" Grid.Row="1" Background="{StaticResource AppBarBackground}" Margin="0,30,0,-34.666" DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeader}" SectionsInViewChanged="OnSectionsInViewChanged">
+            <HubSection x:Name="MenuSection" Width="440" Header="меню" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section1Model}"
 				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/DataSource1DataSource.json, Type=vm:Section1ViewModel}"
 				ContentTemplate="{StaticResource MenuList}" IsHeaderInteractive="{Binding HasMoreItems}" />
-            <HubSection x:Name="EventsSection" Width="360" Header="список событий" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section2Model}"
+            <HubSection x:Name="EventsSection" Width="440" Header="список событий" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section2Model}"
 				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/DataSource2DataSource.json, Type=vm:Section2ViewModel}"
 				ContentTemplate="{StaticResource Section2List}" IsHeaderInteractive="{Binding HasMoreItems}" />
-            <HubSection x:Name="MapSection" Width="360" Header="карта" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.HtmlModel}"
+            <HubSection x:Name="MapSection" Width="440" Header="карта" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.HtmlModel}"
 				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/HtmlDataSource.json, Type=vm:HtmlViewModel}"
 				ContentTemplate="{StaticResource Map}" IsHeaderInteractive="{Binding HasMoreItems}" />
         </Hub>
     </Grid>
-    <Page.BottomAppBar>
-        <CommandBar  Opacity="0.7"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
+        <Page.BottomAppBar>
+        <CommandBar  Opacity="0.8"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="AboutButton" Label="about" Command="{Binding MainViewModel.AboutCommand}"/>
-                <AppBarButton x:Uid="PrivacyButton" Label="privacy" Command="{Binding MainViewModel.PrivacyCommand}"/>
-            </CommandBar.SecondaryCommands>
-            <AppBarButton x:Uid="AddEventButton" Icon="Add" DataContext="{Binding MainViewModel.SelectedItem}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}" Label="создать"/>
+           </CommandBar.SecondaryCommands>
             <AppBarButton x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="настройки"/>
-            <AppBarButton x:Uid="LogOutButton" Icon="BlockContact" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="выход"/>
+            <AppBarButton x:Uid="AddEventButton" Icon="Add" DataContext="{Binding MainViewModel}" Command="{Binding MainViewModel.AddEventCommand}" Visibility="{Binding RefreshVisibility}" Label="создать" Click="AppBarButton_Click"/>
+            <AppBarButton x:Uid="LogOutButton" Icon="BlockContact" DataContext="{Binding MainViewModel}" Command="{Binding MainViewModel.LoginCommand}" Visibility="{Binding RefreshVisibility}" Label="выход" Click="AppBarButton_Click_1"/>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

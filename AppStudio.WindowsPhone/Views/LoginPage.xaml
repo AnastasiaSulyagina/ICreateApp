@@ -24,7 +24,7 @@
 
         <TextBlock x:Uid="AboutSection" Margin="12,0" Grid.Row="1"  Text="вход" Style="{StaticResource PageTitleStyle}" />
 
-        <Grid Grid.Row="2" DataContext="{Binding AboutModel}"
+        <Grid Grid.Row="2" 
             d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -36,32 +36,17 @@
             <ScrollViewer Grid.Row="0" Margin="10,0" Height="642" VerticalAlignment="Top"
                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <TextBox Margin="10, 30, 10, 10"  Height="40" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="TextBox" BorderThickness="0,0,0,2.5"/>
-                    <PasswordBox Height="40" Margin="10, 10, 10, 10" HorizontalAlignment="Stretch" BorderThickness="0,0,0,2.5"/>
+                    <TextBox x:Name="LoginBox" Margin="10, 30, 10, 10"  Height="40" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="логин" BorderThickness="2.5" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Foreground="{Binding Source={StaticResource TitleForeground}}" LostFocus="LoginBox_LostFocus"/>
+                    <PasswordBox x:Name="PasswordBox" Height="40" Margin="10, 10, 10, 10" HorizontalAlignment="Stretch" BorderThickness="2.5" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Foreground="{Binding Source={StaticResource TitleForeground}}" Password="пароль"/>
 
+            <Button x:Name="LoginButton" Content="войти" Margin="0,0,10,0" Height="85" Width="230" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Grid.RowSpan="4" Click="LoginButton_Click"/>
+                    <Button x:Name="RegisterButton" Content="зарегистрироваться" Margin="0,0,10,10" Height="85" Width="230"  VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Click="RegisterButton_Click"/>
 
                 </StackPanel>
             </ScrollViewer>
-            <Button Content="войти" Margin="210,555,0,-12.167" Height="83" Width="230" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Grid.RowSpan="4"/>
-            <Button Content="зарегистрироваться" Margin="210,486,0,56.833" Height="83" Width="230" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}"/>
 
         </Grid>
     </Grid>
-    <Page.BottomAppBar>
-        <CommandBar  Opacity="1.0"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
-            <AppBarButton x:Uid="AddEventButton"  DataContext="{Binding MainViewModel.SelectedItem}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}" Label="категория">
-                <AppBarButton.Icon>
-                    <BitmapIcon UriSource="ms-appx:///Assets/DataImages/ApplicationBar.Select.png"/>
-                </AppBarButton.Icon>
-            </AppBarButton>
-            <AppBarButton x:Uid="SettingsButton" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="место">
-                <AppBarButton.Icon>
-                    <BitmapIcon UriSource="ms-appx:///Assets/DataImages/location.png"/>
-                </AppBarButton.Icon>
-            </AppBarButton>
-            <AppBarButton x:Uid="LogOutButton" Icon="Clock" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="дата\время"/>
-            <AppBarButton x:Uid="LogOutButton" Icon="Camera" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="фото"/>
-        </CommandBar>
-    </Page.BottomAppBar>
+   
 </Page>
 

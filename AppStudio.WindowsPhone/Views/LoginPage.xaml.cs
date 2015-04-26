@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppStudio.Services;
+using Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,8 +27,34 @@ namespace AppStudio.Views
         public LoginPage()
         {
             this.InitializeComponent();
+
+            PasswordBox.GotFocus += RemovePassword;
+            PasswordBox.LostFocus += AddPassword;
+            LoginBox.GotFocus += RemoveText;
+            LoginBox.LostFocus += AddText;
         }
 
+        protected void RemovePassword(object sender, RoutedEventArgs e)
+        {
+            PasswordBox.Password = "";
+        }
+
+        protected void AddPassword(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox.Password == "")
+                PasswordBox.Password = "пароль";
+        }
+
+        protected void RemoveText(object sender, RoutedEventArgs e)
+        {
+            LoginBox.Text = "";
+        }
+
+        protected void AddText(object sender, RoutedEventArgs e)
+        {
+            if (LoginBox.Text == "")
+                LoginBox.Text = "логин";
+        }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -34,6 +62,21 @@ namespace AppStudio.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void LoginBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ServerAPI.Register(LoginBox.Text, PasswordBox.Password, PasswordBox.Password);
+        }
+
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ServerAPI.Login(LoginBox.Text, PasswordBox.Password);
         }
     }
 }

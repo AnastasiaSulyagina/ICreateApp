@@ -7,9 +7,17 @@
 
     <!-- MenuListPhotoLeft -->
     <DataTemplate x:Key="MenuList">
-        <ListView ItemsSource="{Binding Items}" SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True" 
-                  commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  ItemTemplate="{StaticResource MenuItem}" HorizontalAlignment="Left"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="/Assets/DataImages/User.jpg" Height="80" Width="80"/>
+            <TextBlock Grid.Row="0" Margin="10, 20, 0, 0" Text="UserName" Style="{StaticResource SubtitleStyle}"/>
+            <ListView Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True" 
+                      commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      ItemTemplate="{StaticResource MenuItem}" HorizontalAlignment="Left"/>
+        </Grid>
     </DataTemplate>
 
     <!-- MenuListPhotoLeft Item -->

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppStudio.Services;
+using Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +24,7 @@ namespace AppStudio.Views
     /// </summary>
     public sealed partial class AddEventPage : Page
     {
+        private DateTime EventDateTime;
         public AddEventPage()
         {
             this.InitializeComponent();
@@ -34,6 +37,18 @@ namespace AppStudio.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentUser.IsAuthorized())
+            {
+                NavigationServices.NavigateToPage("LoginPage");
+            }
+            else 
+            {
+                ServerAPI.AddEvent(DescriptionBox.Text, EventDateTime);
+            }
         }
     }
 }

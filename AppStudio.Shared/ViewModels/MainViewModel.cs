@@ -116,6 +116,27 @@ namespace AppStudio.ViewModels
                 });
             }
         }
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    NavigationServices.NavigateToPage("LoginPage");
+                });
+            }
+        }
+
+        public ICommand AddEventCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    NavigationServices.NavigateToPage("AddEventPage");
+                });
+            }
+        }
 
         public ICommand PrivacyCommand
         {

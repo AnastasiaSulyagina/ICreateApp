@@ -23,6 +23,6 @@
     <!-- Map -->
     <DataTemplate x:Key="Map">
         <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
-                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,10"/>
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,60,50"/>
     </DataTemplate>
 </ResourceDictionary>

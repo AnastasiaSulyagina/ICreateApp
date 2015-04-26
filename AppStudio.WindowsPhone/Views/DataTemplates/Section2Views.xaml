@@ -8,7 +8,7 @@
     <!-- ListBigPictures -->
     <DataTemplate x:Key="Section2List">
         <Grid>
-            <ListView ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"  commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
+            <ListView Margin="0, 0, 60, 0" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"  commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                      ItemTemplate="{StaticResource Section2Item}">
             </ListView>

@@ -10,10 +10,8 @@ using Windows.Devices.Geolocation;
 
 namespace Common
 {
-    class ServerAPI
+    public class ServerAPI
     {
-        private static string token = "";
-        private static bool isAuthorized = false;
         private static BasicGeoposition coordinate = new BasicGeoposition();//59.875585, 29.825813);
         
         private static string LoginUrl = "Token";
@@ -22,11 +20,15 @@ namespace Common
         private static string AddEventUrl = "api/Events";
         private static string AddCommentUrl = "api/eventComments";
         private static string SubscribeUrl = "api/Friends/Follow";
+        private static string GetFriendsUrl = "api/Friends/my/m";
         private static string SiteUrl = "icreate.azurewebsites.net/api";
 
-        public static bool IsAuthorised()
+
+        static async Task<string> GetFriends()
         {
-            return isAuthorized;
+            var client = new HttpClient();
+            var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
+            return result;
         }
 
         public static async Task<bool> Login(string login, string password)
@@ -40,13 +42,13 @@ namespace Common
                 var message = result.ReasonPhrase;
                 var responseString = await result.Content.ReadAsStringAsync();
                 var user = JObject.Parse(responseString);
-                token = user["access_token"].Value<string>();
-                isAuthorized = true;
+                
+                CurrentUser.Authorize(user["access_token"].Value<string>(), login);
+                
             }
             catch (WebException we)
             {
-                token = we.Message;
-                isAuthorized = false;
+                CurrentUser.Unauthorize();
                 return false;
             }
             return true;
@@ -70,8 +72,7 @@ namespace Common
             }
             catch (WebException we)
             {
-                token = we.Message;
-                isAuthorized = false;
+                CurrentUser.Unauthorize();
             }
             return true;
         }
@@ -79,7 +80,7 @@ namespace Common
         public static async void AddEvent(string description, DateTime datetime)
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.GetToken());
             try
             {
                 var data = JsonConvert.SerializeObject(new
@@ -109,5 +110,6 @@ namespace Common
             var result = await client.GetStringAsync(SiteUrl + GetEventsUrl);
             return result;
         }
+
     }
 }

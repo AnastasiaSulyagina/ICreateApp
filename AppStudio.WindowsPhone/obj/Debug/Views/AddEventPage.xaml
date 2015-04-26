@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="AppStudio.Views.AddEventPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppStudio.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:AppStudio.Controls"
+    xmlns:html2xaml="using:AppStudio.Controls.Html2Xaml"
+    xmlns:vm="using:AppStudio.ViewModels"
+    mc:Ignorable="d"
+    Background="{StaticResource AppBackground}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
+            <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
+        </Border>
+
+        <TextBlock x:Uid="AboutSection" Margin="12,0" Grid.Row="1"  Text="новое событие" Style="{StaticResource PageTitleStyle}" />
+
+        <Grid Grid.Row="2" DataContext="{Binding AboutModel}"
+              d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0" Margin="10,0" Height="642" VerticalAlignment="Top"
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+            <TextBox x:Name="DescriptionBox" Height="457" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" BorderThickness="2.5" Foreground="{Binding Source={StaticResource TitleForeground}}"/>
+            <Button x:ConnectionId='1' Content="создать" Margin="10,10,10,10" Height="83" Width="195" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}"                     />
+
+                </StackPanel>
+            </ScrollViewer>
+            
+        </Grid>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar  Opacity="1.0"  Visibility="Visible" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
+            <AppBarButton x:Uid="AddEventButton"  DataContext="{Binding MainViewModel.SelectedItem}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}" Label="категория">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/DataImages/ApplicationBar.Select.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Uid="SettingsButton" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="место">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/DataImages/location.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Uid="LogOutButton" Icon="Clock" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="дата\время"/>
+            <AppBarButton x:Uid="LogOutButton" Icon="Camera" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="фото"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
+

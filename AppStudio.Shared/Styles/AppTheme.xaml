@@ -6,6 +6,8 @@
     <!--<APP COLORS>-->
     <!--Pages Colors-->
     <Color x:Key="AppBackgroundColor">#e6e6e6</Color>
+    <Color x:Key="AppDarkGreyColor">#bdc3c7</Color>
+    <Color x:Key="AppLightForegroundColor">#e74c3c</Color>
     <!--Text Colors-->
     <Color x:Key="AppTitleForegroundColor">#ffffff</Color>
     <Color x:Key="PageTitleForegroundColor">#c13e2a</Color>
@@ -25,6 +27,7 @@
     <SolidColorBrush x:Key="TitleForeground" Color="{StaticResource TitleForegroundColor}"/>
     <SolidColorBrush x:Key="SubtitleForeground" Color="{StaticResource SubtitleForegroundColor}"/>
     <SolidColorBrush x:Key="DescriptionForeground" Color="{StaticResource DescriptionForegroundColor}"/>
+    <SolidColorBrush x:Key="DarkGreyForeground" Color="{StaticResource AppDarkGreyColor}"/>
     <!--AppBar Brushes-->
     <SolidColorBrush x:Key="AppBarBackground" Color="{StaticResource AppBarBackgroundColor}" />
     <SolidColorBrush x:Key="AppBarForeground" Color="{StaticResource AppBarForegroundColor}"/>

@@ -12,6 +12,7 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Comment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\CurrentUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Event.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ServerAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\User.cs" />
@@ -62,6 +63,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuDialog1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuExit1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\search.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\User.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ErrorImage.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>

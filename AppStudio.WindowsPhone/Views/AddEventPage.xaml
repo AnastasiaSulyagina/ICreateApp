@@ -35,15 +35,17 @@
 
             <ScrollViewer Grid.Row="0" Margin="10,0" Height="642" VerticalAlignment="Top"
                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+            <TextBox x:Name="DescriptionBox" Height="457" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" BorderThickness="2.5" Foreground="{Binding Source={StaticResource TitleForeground}}"/>
+            <Button Content="создать" Margin="10,10,10,10" Height="83" Width="195" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Click="Button_Click"/>
 
+                </StackPanel>
             </ScrollViewer>
-            <Button Content="создать" Margin="245,568,0,1.083" Height="83" Width="195" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}"/>
-            <TextBox Height="457" BorderBrush="{StaticResource AppBarForeground}" Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" BorderThickness="0,2.5"/>
-
+            
         </Grid>
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar  Opacity="1.0"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
+        <CommandBar  Opacity="1.0"  Visibility="Visible" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
             <AppBarButton x:Uid="AddEventButton"  DataContext="{Binding MainViewModel.SelectedItem}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}" Label="категория">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/DataImages/ApplicationBar.Select.png"/>
