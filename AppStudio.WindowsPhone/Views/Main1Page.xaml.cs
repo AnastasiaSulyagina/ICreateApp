@@ -8,13 +8,16 @@ using Windows.UI.Xaml.Navigation;
 
 using AppStudio.Services;
 using AppStudio.ViewModels;
+using System.Collections.Generic;
+using Common;
+using Newtonsoft.Json;
 
 namespace AppStudio.Views
 {
     public sealed partial class Main1Page : Page
     {
         private NavigationHelper _navigationHelper;
-
+        private List<User> Friends;
         private DataTransferManager _dataTransferManager;
 
         public Main1Page()
@@ -27,6 +30,14 @@ namespace AppStudio.Views
 
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
+        }
+
+        private async void update()
+        {
+
+            string result = await CurrentUser.GetFriends();
+            Friends = JsonConvert.DeserializeObject<List<User>>(result);
+            //eventList.ItemsSource = Friends;
         }
 
         public Main1ViewModel Main1Model { get; private set; }

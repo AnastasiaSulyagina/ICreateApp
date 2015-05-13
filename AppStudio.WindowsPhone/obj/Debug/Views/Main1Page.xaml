@@ -39,9 +39,6 @@
         <CommandBar ClosedDisplayMode="Minimal" Visibility="{Binding Main1Model.AppBarVisibility}" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
             <AppBarButton x:Uid="TextToSpeechButton" Icon="Volume" DataContext="{Binding Main1Model}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}"/>
             <AppBarButton x:Uid="RefreshButton" Icon="Refresh" DataContext="{Binding Main1Model}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}"/>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="ShareItemButton" Label="share item" DataContext="{Binding Main1Model}" Command="{Binding ShareItemCommand}" Visibility="{Binding ShareItemVisibility}"/>
-            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

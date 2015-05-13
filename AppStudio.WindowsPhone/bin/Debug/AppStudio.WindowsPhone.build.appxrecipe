@@ -93,14 +93,17 @@
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\map.png">
       <PackagePath>Assets\DataImages\map.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\MenuClock1.png">
-      <PackagePath>Assets\DataImages\MenuClock1.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\MenuClock.png">
+      <PackagePath>Assets\DataImages\MenuClock.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\MenuDialog1.png">
-      <PackagePath>Assets\DataImages\MenuDialog1.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\MenuDialog.png">
+      <PackagePath>Assets\DataImages\MenuDialog.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\MenuExit1.png">
       <PackagePath>Assets\DataImages\MenuExit1.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\MenuFriends.png">
+      <PackagePath>Assets\DataImages\MenuFriends.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\search.png">
       <PackagePath>Assets\DataImages\search.png</PackagePath>
@@ -143,6 +146,18 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\Views\DataTemplates\HtmlViews.xaml">
       <PackagePath>Views\DataTemplates\HtmlViews.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\alexey.jpg">
+      <PackagePath>Assets\DataImages\alexey.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\artyom.jpg">
+      <PackagePath>Assets\DataImages\artyom.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\nastya.jpg">
+      <PackagePath>Assets\DataImages\nastya.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\phil.jpg">
+      <PackagePath>Assets\DataImages\phil.jpg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Shared\Assets\DataImages\User.jpg">
       <PackagePath>Assets\DataImages\User.jpg</PackagePath>
@@ -243,6 +258,9 @@
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\Views\PicturePage.xbf">
+      <PackagePath>Views\PicturePage.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\Views\StartersPage.xbf">
       <PackagePath>Views\StartersPage.xbf</PackagePath>
     </AppxPackagedFile>
@@ -272,6 +290,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\Styles\PlatformStyles.xbf">
       <PackagePath>Styles\PlatformStyles.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\Views\UserPage.xbf">
+      <PackagePath>Views\UserPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\AppStudio.xr.xml">
       <PackagePath>AppStudio.xr.xml</PackagePath>

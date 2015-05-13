@@ -126,3 +126,13 @@ C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Windo
 C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\LoginPage.g.cs
 C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\LoginPage.xaml
 C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\LoginPage.xbf
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\UserPage.g.i.cs
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\UserPage.g.cs
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\UserPage.xaml
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\UserPage.xbf
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\Views\UserPage.xbf
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\bin\Debug\Views\PicturePage.xbf
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\PicturePage.g.i.cs
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\PicturePage.g.cs
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\PicturePage.xaml
+C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\obj\Debug\Views\PicturePage.xbf

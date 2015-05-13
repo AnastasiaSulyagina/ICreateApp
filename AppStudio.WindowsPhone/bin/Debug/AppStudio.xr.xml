@@ -22,6 +22,7 @@
     <RootPropertyPathName Name="AboutCommand" />
     <RootPropertyPathName Name="LoginCommand" />
     <RootPropertyPathName Name="AddEventCommand" />
+    <RootPropertyPathName Name="EditPictureCommand" />
     <RootPropertyPathName Name="StartersModel" />
     <RootPropertyPathName Name="ShareItemCommand" />
     <RootPropertyPathName Name="ShareItemVisibility" />
@@ -69,8 +70,8 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
       <RootProperty Name="ChildrenTransitions" />
-      <RootProperty Name="Width" />
       <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="Width" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetRowSpan" />
@@ -102,9 +103,10 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="IsHitTestVisible" />
       <RootProperty Name="TextWrapping" />
-      <RootProperty Name="FontFamily" />
-      <RootProperty Name="TextTrimming" />
       <RootProperty Name="Foreground" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="TextTrimming" />
       <RootProperty Name="FontWeight" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
@@ -152,6 +154,11 @@
     <RootType FullName="AppStudio.Views.AboutThisAppPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Height" />
@@ -206,10 +213,10 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Stretch" />
-      <RootProperty Name="Source" />
       <RootProperty Name="Height" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Source" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="AppStudio.Views.ImageViewer" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
@@ -252,6 +259,10 @@
       <RootProperty Name="IsHeaderInteractive" />
     </RootType>
     <RootType FullName="AppStudio.Views.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="AppStudio.Views.PicturePage" />
     <RootType FullName="AppStudio.Views.StartersPage" />
     <RootType FullName="AppStudio.Views.Main1Page" />
     <RootType FullName="AppStudio.Views.DessertsPage" />
@@ -343,9 +354,6 @@
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Path">
       <RootProperty Name="Margin" />
       <RootProperty Name="Data" />
@@ -366,6 +374,7 @@
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
+    <RootType FullName="AppStudio.Views.UserPage" />
     <RootType FullName="Windows.UI.Color" />
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
       <RootProperty Name="Color" />

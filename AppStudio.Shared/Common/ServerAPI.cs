@@ -21,15 +21,8 @@ namespace Common
         private static string AddCommentUrl = "api/eventComments";
         private static string SubscribeUrl = "api/Friends/Follow";
         private static string GetFriendsUrl = "api/Friends/my/m";
-        private static string SiteUrl = "icreate.azurewebsites.net/api";
+        private static string SiteUrl = "http://icreate.azurewebsites.net/";
 
-
-        static async Task<string> GetFriends()
-        {
-            var client = new HttpClient();
-            var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
-            return result;
-        }
 
         public static async Task<bool> Login(string login, string password)
         {
@@ -80,7 +73,7 @@ namespace Common
         public static async void AddEvent(string description, DateTime datetime)
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.GetToken());
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
             try
             {
                 var data = JsonConvert.SerializeObject(new
@@ -104,6 +97,11 @@ namespace Common
 
         }
 
+        public static async void UploadPicture()
+        {
+        
+        }
+
         public static async Task<string> GetEvents()
         {
             var client = new HttpClient();
@@ -111,5 +109,20 @@ namespace Common
             return result;
         }
 
+        public static async Task<string> GetFriends()
+        {
+            var client = new HttpClient();
+            var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
+            return result;
+        }
+        public static async void AddComment()
+        {
+
+        }
+        public static async void Follow()
+        {
+
+        }
+        
     }
 }

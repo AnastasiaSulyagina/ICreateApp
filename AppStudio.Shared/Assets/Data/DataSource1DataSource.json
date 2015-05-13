@@ -9,13 +9,13 @@
     {
       "Type": "Section",
       "Title": "friends",
-      "Icon": "/Assets/DataImages/Item-5b7e62bf-29b9-4305-a5e3-cf2f06db3d5d.png",
+      "Icon": "/Assets/DataImages/MenuFriends.png",
       "Target": "Main1Page"
     },
     {
         "Type": "Section",
         "Title": "dialogs",
-        "Icon": "/Assets/DataImages/MenuDialog1.png",
+        "Icon": "/Assets/DataImages/MenuDialog.png",
         "Target": "DessertsPage"
     }
   ]

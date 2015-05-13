@@ -6,8 +6,10 @@ Assets\Data\HtmlDataSource.htm
 Assets\Data\HtmlDataSource.json
 Assets\Data\MainDataSource.json
 Assets\Data\StartersDataSource.json
+Assets\DataImages\alexey.jpg
 Assets\DataImages\ApplicationBar.Delete.png
 Assets\DataImages\ApplicationBar.Select.png
+Assets\DataImages\artyom.jpg
 Assets\DataImages\Content.jpg
 Assets\DataImages\Content-1.jpg
 Assets\DataImages\Content-2.jpg
@@ -33,9 +35,12 @@ Assets\DataImages\Item-f5a74e7a-d859-47ee-a883-dd8a3986c3fe.jpg
 Assets\DataImages\list.png
 Assets\DataImages\location.png
 Assets\DataImages\map.png
-Assets\DataImages\MenuClock1.png
-Assets\DataImages\MenuDialog1.png
+Assets\DataImages\MenuClock.png
+Assets\DataImages\MenuDialog.png
 Assets\DataImages\MenuExit1.png
+Assets\DataImages\MenuFriends.png
+Assets\DataImages\nastya.jpg
+Assets\DataImages\phil.jpg
 Assets\DataImages\search.png
 Assets\DataImages\User.jpg
 Assets\ErrorImage.png
@@ -64,9 +69,11 @@ Views\LoginPage.xbf
 Views\Main1DetailPage.xbf
 Views\Main1Page.xbf
 Views\MainPage.xbf
+Views\PicturePage.xbf
 Views\Section2DetailPage.xbf
 Views\StartersDetailPage.xbf
 Views\StartersPage.xbf
+Views\UserPage.xbf
 Views\DataTemplates\DessertsViews.xaml
 Views\DataTemplates\HtmlViews.xaml
 Views\DataTemplates\Main1Views.xaml

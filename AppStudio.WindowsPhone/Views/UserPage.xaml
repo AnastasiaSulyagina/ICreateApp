@@ -28,13 +28,13 @@
         <Grid Grid.Row="2" 
             d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="160"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer Grid.Row="0" Margin="10,0" Height="642" VerticalAlignment="Top"
+            <ScrollViewer Grid.Row="1" Margin="10,0"  VerticalAlignment="Stretch"
                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
                     <Grid >
@@ -49,11 +49,22 @@
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
-            <StackPanel HorizontalAlignment="Stretch" Background="{StaticResource DarkGreyForeground}" Height="50" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="Top"/>
+            <StackPanel HorizontalAlignment="Stretch" Background="{StaticResource AppBarForeground}" Height="50" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="Top">
+                <TextBlock Text="События" Margin="10, 10, 10, 10" Foreground="{StaticResource AppBackground}" FontSize="24" FontFamily="Segoe WP Light"/>
+            </StackPanel>
 
         </Grid>
+        
     </Grid>
-
+    <Page.BottomAppBar>
+        <CommandBar  Opacity="0.8"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="AboutButton" Label="about" Command="{Binding MainViewModel.AboutCommand}"/>
+            </CommandBar.SecondaryCommands>
+            <AppBarButton x:Uid="FollowButton" Icon="Add" DataContext="{Binding MainViewModel}"  Visibility="{Binding RefreshVisibility}" Label="добавить в друзья" Click="AppBarButton_Click"/>
+            <AppBarButton x:Uid="WriteMessageButton" Icon="MailFilled" DataContext="{Binding MainViewModel}" Visibility="{Binding RefreshVisibility}" Label="сообщение" Click="AppBarButton_Click_1"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
 
 

@@ -137,6 +137,16 @@ namespace AppStudio.ViewModels
                 });
             }
         }
+        private ICommand EditPictureCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    NavigationServices.NavigateToPage("PicturePage");
+                });
+            }
+        }
 
         public ICommand PrivacyCommand
         {
