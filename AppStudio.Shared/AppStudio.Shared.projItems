@@ -54,14 +54,20 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\alexey.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\ApplicationBar.Delete.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\ApplicationBar.Select.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\artyom.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\list.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\location.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\map.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuClock1.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuDialog1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuClock.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuDialog.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuExit1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuFriends.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\MenuFriends.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\nastya.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\phil.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\search.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\User.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ErrorImage.png">

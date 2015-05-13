@@ -23,7 +23,8 @@ namespace AppStudio.ViewModels
                     itemClickCommand = new RelayCommandEx<MainSchema>(
                         (item) =>
                         {
-                            NavigationServices.NavigateToPage("Main1Detail", item);
+                             //NavigationServices.NavigateToPage("Main1Detail", item);
+                           NavigationServices.NavigateToPage("UserPage", item);
                         });
                 }
 

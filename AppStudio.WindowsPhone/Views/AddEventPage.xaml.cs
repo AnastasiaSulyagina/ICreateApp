@@ -41,7 +41,7 @@ namespace AppStudio.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentUser.IsAuthorized())
+            if (CurrentUser.isAuthorized)
             {
                 NavigationServices.NavigateToPage("LoginPage");
             }

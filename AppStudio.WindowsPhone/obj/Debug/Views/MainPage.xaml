@@ -40,9 +40,9 @@
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="AboutButton" Label="about" Command="{Binding MainViewModel.AboutCommand}"/>
            </CommandBar.SecondaryCommands>
-            <AppBarButton x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="настройки"/>
-            <AppBarButton x:ConnectionId='2' x:Uid="AddEventButton" Icon="Add" DataContext="{Binding MainViewModel}" Command="{Binding MainViewModel.AddEventCommand}" Visibility="{Binding RefreshVisibility}" Label="создать"                           />
-            <AppBarButton x:ConnectionId='3' x:Uid="LogOutButton" Icon="BlockContact" DataContext="{Binding MainViewModel}" Command="{Binding MainViewModel.LoginCommand}" Visibility="{Binding RefreshVisibility}" Label="выход"                             />
+            <AppBarButton x:ConnectionId='2' x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}" Command="{Binding MainViewModel.EditPictureCommand}" Visibility="{Binding RefreshVisibility}" Label="настройки"                             />
+            <AppBarButton x:ConnectionId='3' x:Uid="AddEventButton" Icon="Add" DataContext="{Binding MainViewModel}" Command="{Binding MainViewModel.AddEventCommand}" Visibility="{Binding RefreshVisibility}" Label="создать"                           />
+            <AppBarButton x:ConnectionId='4' x:Uid="LogOutButton" Icon="BlockContact" DataContext="{Binding MainViewModel}" Command="{Binding MainViewModel.LoginCommand}" Visibility="{Binding RefreshVisibility}" Label="выход"                             />
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

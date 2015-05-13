@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace AppStudio.Views
         public UserPage()
         {
             this.InitializeComponent();
+            
         }
 
         /// <summary>
@@ -34,6 +36,16 @@ namespace AppStudio.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServerAPI.Follow();
+        }
+
+        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -19,9 +19,9 @@
 
     <!-- ListHorizontalCards Item -->
     <DataTemplate x:Key="Main1Item">
-        <Grid Height="120" Margin="0,0,0,10" Style="{StaticResource BoxGrid}">                        
+        <Grid Height="80" Margin="0,0,0,10" Style="{StaticResource BoxGrid}">                        
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Image Source="{Binding Image}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -32,8 +32,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2"/>
-                    <TextBlock Grid.Row="1" Margin="0,5,0,0" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding Subtitle}"/>
+                    <TextBlock Grid.Row="1" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2"/>
+                    <!--<TextBlock Grid.Row="1" Margin="0,5,0,0" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding Subtitle}"/>-->
                 </Grid>
             </Grid>            
         </Grid>

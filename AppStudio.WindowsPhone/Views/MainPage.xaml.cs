@@ -11,6 +11,7 @@ using Windows.ApplicationModel.Background;
 
 using AppStudio.Services;
 using AppStudio.ViewModels;
+using Common;
 
 namespace AppStudio.Views
 {
@@ -24,6 +25,9 @@ namespace AppStudio.Views
 
         public MainPage()
         {
+            CurrentUser.PictureUrl = "ms-appx:///Assets/DataImages/nastya.jpg";
+            Section1ViewModel.UserName = CurrentUser.UserName;
+            Section1ViewModel.PictureUrl = CurrentUser.PictureUrl;
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -35,6 +39,7 @@ namespace AppStudio.Views
 
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
+            
         }
 
         public MainViewModel MainViewModel
@@ -101,6 +106,11 @@ namespace AppStudio.Views
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
         {
             NavigationServices.NavigateToPage("LoginPage");
+        }
+
+        private void AppBarButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            NavigationServices.NavigateToPage("PicturePage");
         }
     }
 }
