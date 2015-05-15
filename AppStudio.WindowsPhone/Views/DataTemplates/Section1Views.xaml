@@ -3,20 +3,36 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:AppStudio.Controls"
     xmlns:html2xaml="using:AppStudio.Controls.Html2Xaml"
-    xmlns:commands="using:AppStudio.Commands">
+    xmlns:commands="using:AppStudio.Commands" xmlns:Common="using:Common">
 
     <!-- MenuListPhotoLeft -->
     <DataTemplate x:Key="MenuList">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
+                <RowDefinition Height="150" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Image Grid.Row="0" Source="/Assets/DataImages/User.jpg" Height="80" Width="80"/>
-            <TextBlock Grid.Row="0" Margin="10, 20, 0, 0" Text="UserName" Style="{StaticResource SubtitleStyle}"/>
+            <StackPanel Grid.Row="0">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button BorderBrush="{x:Null}" x:Name="ProfilePicture" Tapped="Click_2" HorizontalAlignment="Left" Grid.Column="0" Height="100" VerticalAlignment="Top" Width="100" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="{Binding PictureUrl}" Stretch="UniformToFill"/>
+                        </Button.Background>
+                    </Button>
+                    <TextBlock x:Name="UserName" Margin="0, 10, 10, 10" TextWrapping="Wrap" Grid.Column="1" Text="{Binding UserName}" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource SubtitleStyle}">
+                    </TextBlock>
+
+
+                </Grid>
+            </StackPanel>
+
             <ListView Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True" 
-                      commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      ItemTemplate="{StaticResource MenuItem}" HorizontalAlignment="Left"/>
+				commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+				ItemTemplate="{StaticResource MenuItem}" HorizontalAlignment="Left"/>
         </Grid>
     </DataTemplate>
 

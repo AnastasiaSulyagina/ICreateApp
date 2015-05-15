@@ -1,2 +1,2 @@
-C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Data\AppStudio.Data.csproj;neutral
-C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.WindowsPhone\AppStudio.WindowsPhone.csproj;neutral
+D:\OneDrive\Code\ПРОЕКТ СКАЧАННОЕ\15.05(3)\AppStudio.Data\AppStudio.Data.csproj;neutral
+D:\OneDrive\Code\ПРОЕКТ СКАЧАННОЕ\15.05(3)\AppStudio.WindowsPhone\AppStudio.WindowsPhone.csproj;neutral

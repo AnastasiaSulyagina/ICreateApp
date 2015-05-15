@@ -28,7 +28,7 @@
         </Border>
         <TextBlock Grid.Row="1" Margin="12,24,0,0" Style="{StaticResource PageTitleStyle}">main</TextBlock>
 
-        <Grid Grid.Row="2" Margin="12,12,12,0" DataContext="{Binding Main1Model}"
+        <Grid Grid.Row="2" Margin="14,12.167,10,0" DataContext="{Binding Main1Model}"
               d:DataContext="{d:DesignData Source=/Assets/Data/MainDataSource.json, Type=vm:Main1ViewModel, IsDesignTimeCreatable=true}">
             <ContentPresenter ContentTemplate="{StaticResource Main1List}" />
         </Grid>
@@ -39,9 +39,6 @@
         <CommandBar ClosedDisplayMode="Minimal" Visibility="{Binding Main1Model.AppBarVisibility}" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
             <AppBarButton x:Uid="TextToSpeechButton" Icon="Volume" DataContext="{Binding Main1Model}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}"/>
             <AppBarButton x:Uid="RefreshButton" Icon="Refresh" DataContext="{Binding Main1Model}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}"/>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="ShareItemButton" Label="share item" DataContext="{Binding Main1Model}" Command="{Binding ShareItemCommand}" Visibility="{Binding ShareItemVisibility}"/>
-            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

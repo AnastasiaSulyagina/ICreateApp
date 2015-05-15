@@ -14,15 +14,12 @@
     <RootPropertyPathName Name="SelectedItem" />
     <RootPropertyPathName Name="TextToSpeechCommand" />
     <RootPropertyPathName Name="TextToSpeechVisibility" />
-    <RootPropertyPathName Name="HtmlModel" />
-    <RootPropertyPathName Name="HasMoreItems" />
-    <RootPropertyPathName Name="Section2Model" />
-    <RootPropertyPathName Name="Section1Model" />
-    <RootPropertyPathName Name="AppBarVisibility" />
-    <RootPropertyPathName Name="AboutCommand" />
-    <RootPropertyPathName Name="LoginCommand" />
-    <RootPropertyPathName Name="AddEventCommand" />
+    <RootPropertyPathName Name="Events" />
+    <RootPropertyPathName Name="Description" />
+    <RootPropertyPathName Name="User" />
+    <RootPropertyPathName Name="UserId" />
     <RootPropertyPathName Name="StartersModel" />
+    <RootPropertyPathName Name="AppBarVisibility" />
     <RootPropertyPathName Name="ShareItemCommand" />
     <RootPropertyPathName Name="ShareItemVisibility" />
     <RootPropertyPathName Name="Main1Model" />
@@ -31,6 +28,8 @@
     <RootPropertyPathName Name="GoToSourceCommand" />
     <RootPropertyPathName Name="GoToSourceVisibility" />
     <RootPropertyPathName Name="ChangeFontSizeCommand" />
+    <RootPropertyPathName Name="Section2Model" />
+    <RootPropertyPathName Name="AboutCommand" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
@@ -60,6 +59,7 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Content" />
       <RootProperty Name="BottomAppBar" />
+      <RootProperty Name="DataContext" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
@@ -67,10 +67,10 @@
       <RootProperty Name="Children" />
       <RootProperty Name="DataContext" />
       <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="ChildrenTransitions" />
-      <RootProperty Name="Width" />
       <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="ChildrenTransitions" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetRowSpan" />
@@ -98,17 +98,19 @@
       <RootProperty Name="Style" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Inlines" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="IsHitTestVisible" />
-      <RootProperty Name="TextWrapping" />
       <RootProperty Name="FontFamily" />
+      <RootProperty Name="Height" />
       <RootProperty Name="TextTrimming" />
-      <RootProperty Name="Foreground" />
       <RootProperty Name="FontWeight" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Source" />
+      <RootProperty Name="RelativeSource" />
       <RootProperty Name="Mode" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
@@ -152,6 +154,11 @@
     <RootType FullName="AppStudio.Views.AboutThisAppPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Height" />
@@ -206,10 +213,10 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Stretch" />
-      <RootProperty Name="Source" />
       <RootProperty Name="Height" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Source" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="AppStudio.Views.ImageViewer" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
@@ -222,36 +229,40 @@
       <RootProperty Name="Password" />
     </RootType>
     <RootType FullName="AppStudio.Views.LoginPage" />
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.TransitionCollection" />
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.EntranceThemeTransition" />
-    <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Fill" />
-      <RootProperty Name="IsHitTestVisible" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="StrokeDashOffset" />
-      <RootProperty Name="StrokeEndLineCap" />
-      <RootProperty Name="Stroke" />
-      <RootProperty Name="StrokeDashArray" />
-    </RootType>
+    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.ThemeResourceExtension" />
+    <RootType FullName="Windows.UI.Xaml.Data.RelativeSource" />
     <RootType FullName="Windows.UI.Xaml.Controls.Hub">
       <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
       <RootProperty Name="DataContext" />
       <RootProperty Name="HeaderTemplate" />
       <RootProperty Name="Sections" />
-      <RootEvent Name="SectionsInViewChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.HubSection">
       <RootProperty Name="Width" />
       <RootProperty Name="Header" />
       <RootProperty Name="HeaderTemplate" />
-      <RootProperty Name="DataContext" />
       <RootProperty Name="ContentTemplate" />
-      <RootProperty Name="IsHeaderInteractive" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.DataTemplate">
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
     </RootType>
     <RootType FullName="AppStudio.Views.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="AppStudio.Views.PicturePage" />
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.TransitionCollection" />
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.EntranceThemeTransition" />
     <RootType FullName="AppStudio.Views.StartersPage" />
     <RootType FullName="AppStudio.Views.Main1Page" />
     <RootType FullName="AppStudio.Views.DessertsPage" />
@@ -332,7 +343,6 @@
       <RootProperty Name="Storyboard" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerUpThemeAnimation" />
-    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerDownThemeAnimation" />
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.TemplateBindingExtension" />
     <RootType FullName="Windows.UI.Xaml.Setter">
@@ -343,8 +353,13 @@
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
+    <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="StrokeDashOffset" />
+      <RootProperty Name="StrokeEndLineCap" />
+      <RootProperty Name="Stroke" />
+      <RootProperty Name="StrokeDashArray" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Path">
       <RootProperty Name="Margin" />
@@ -363,9 +378,7 @@
       <RootProperty Name="Padding" />
       <RootProperty Name="VerticalContentAlignment" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.DataTemplate">
-      <RootProperty Name="Template" />
-    </RootType>
+    <RootType FullName="AppStudio.Views.UserPage" />
     <RootType FullName="Windows.UI.Color" />
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
       <RootProperty Name="Color" />

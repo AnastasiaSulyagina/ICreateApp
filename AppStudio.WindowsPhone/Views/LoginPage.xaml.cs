@@ -72,11 +72,13 @@ namespace AppStudio.Views
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             await ServerAPI.Register(LoginBox.Text, PasswordBox.Password, PasswordBox.Password);
+            NavigationServices.NavigateToPage("MainPage");
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             await ServerAPI.Login(LoginBox.Text, PasswordBox.Password);
+            NavigationServices.NavigateToPage("MainPage");
         }
     }
 }

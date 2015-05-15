@@ -4,23 +4,38 @@ using System.Text;
 
 namespace Common
 {
-    class Event
+    public class Event
     {
-        private User Organizer { get; set; }
-        private int Id { get; set; }
+        public User User { get { return mUser; } }
+        public int EventId { get { return mEventId; } }
         //private GeoCoordinate coordinate { get; set; }
-        private string Description { get; set; }
-        private string ShortDescription { get; set; }
+        public string Description { get { return mDescription; } }
+        //private string ShortDescription { get; set; }
         //private string MySquareDescriprion { get; set; }
-        private int Category { get; set; }
-        private DateTime DateTime { get; set; }
-        private double Latitude { get; set; }
-        private double Longitude { get; set; }
-        private List<Comment> comments { get; set; }
+        //private int Category { get; set; }
+        public DateTime EventDate { get { return mEventDate; } }
+        public DateTime DateCreate { get { return mDateCreate; } }
+        public string LocationCaption { get { return mLocationCaption; } }
+        public double Latitude { get { return mLatitude; } }
+        public double Longitude { get { return mLongitude; } }
+        //private List<Comment> comments { get; set; }
 
-        public Event(DateTime time, double latitude, double longitude, String description, int category)
+        private User mUser;
+        private int mEventId;
+        //private GeoCoordinate coordinate { get; set; }
+        private string mDescription;
+        //private string ShortDescription { get; set; }
+        //private string MySquareDescriprion { get; set; }
+        //private int Category { get; set; }
+        private DateTime mEventDate;
+        private DateTime mDateCreate;
+        private string mLocationCaption;
+        private double mLatitude;
+        private double mLongitude;
+
+        public Event(int eventId, string locationCaption, User user, DateTime eventDate, DateTime dateCreate, double latitude, double longitude, String description)
         {
-            Id = 0;
+            mEventId = eventId;
             //MySquareDescriprion = "";
             //for (int i = 0; i < description.Length; ++i)
             //{
@@ -35,12 +50,14 @@ namespace Common
             //    }
             //}
 
-            DateTime = time;
-            Latitude = latitude;
-            Longitude = longitude;
-            Description = description;
-            Category = category;
-            ShortDescription = Description;
+            mUser = user;
+            mEventDate = eventDate;
+            mDateCreate = dateCreate;
+            mLocationCaption = locationCaption;
+            mLatitude = latitude;
+            mLongitude = longitude;
+            mDescription = description;
+            //ShortDescription = description;
             //this.Coordinate = new GeoCoordinate(latitude, longitude);
         }
     }

@@ -8,11 +8,15 @@ using Windows.UI.Xaml.Controls;
 
 using AppStudio.Data;
 using AppStudio.Services;
+using Common;
+using Windows.UI.Core;
 
 namespace AppStudio.ViewModels
 {
     public class Section1ViewModel : ViewModelBase<MenuSchema>
     {
+        public static string UserName {get; set;}
+        public static string PictureUrl {get; set;}
         private RelayCommandEx<MenuSchema> itemClickCommand;
         public RelayCommandEx<MenuSchema> ItemClickCommand
         {
@@ -26,13 +30,13 @@ namespace AppStudio.ViewModels
                             if (item.GetValue("Type").EqualNoCase("Section"))
                             {
                                 NavigationServices.NavigateToPage(item.GetValue("Target"));
-                                }
-                                else
+                            }
+                            else
+                            {
+                                var targetUri = TryCreateUri(item.GetValue("Target"));
+                                if (targetUri != null)
                                 {
-                                    var targetUri = TryCreateUri(item.GetValue("Target"));
-                                    if (targetUri != null)
-                                    {
-                                        NavigationServices.NavigateTo(targetUri);
+                                    NavigationServices.NavigateTo(targetUri);
                                 }
                             }
                         });
@@ -42,6 +46,11 @@ namespace AppStudio.ViewModels
             }
         }
 
+        private bool Click_2()
+        {
+            NavigationServices.NavigateToPage("PicturePage");
+            return false;
+        }
 
         private RelayCommandEx<string> changeFontSizeCommand;
 
