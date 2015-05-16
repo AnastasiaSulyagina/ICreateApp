@@ -12,11 +12,14 @@ using Windows.ApplicationModel.Background;
 using AppStudio.Services;
 using AppStudio.ViewModels;
 using Common;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace AppStudio.Views
 {
     public sealed partial class MainPage : Page
     {
+        public string EventString { get; set; }
         private MainViewModel _mainViewModel = null;
 
         private NavigationHelper _navigationHelper;
@@ -25,6 +28,7 @@ namespace AppStudio.Views
 
         public MainPage()
         {
+            update();
             CurrentUser.PictureUrl = "ms-appx:///Assets/DataImages/nastya.jpg";
             Section1ViewModel.UserName = CurrentUser.UserName;
             Section1ViewModel.PictureUrl = CurrentUser.PictureUrl;
@@ -40,6 +44,13 @@ namespace AppStudio.Views
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
             
+        }
+        public async void update()
+        { 
+            EventString = await ServerAPI.GetEvents();
+            Section2ViewModel.Events = JsonConvert.DeserializeObject<List<Event>>(EventString);
+            int c = 0;
+        
         }
 
         public MainViewModel MainViewModel

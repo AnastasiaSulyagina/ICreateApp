@@ -34,7 +34,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer Grid.Row="1" Margin="10,0"  VerticalAlignment="Stretch"
+            <ScrollViewer Grid.Row="0" Margin="10,0"  VerticalAlignment="Stretch"
                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
                     <Grid >
@@ -42,8 +42,8 @@
                             <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions> 
-                        <Image HorizontalAlignment="Left" Grid.Column="0" Height="150" VerticalAlignment="Top" Width="150"/>
-                        <TextBlock Margin="0, 10, 10, 10" TextWrapping="Wrap" Grid.Column="1" Text="{}" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Image x:Name="userPic" HorizontalAlignment="Left" Grid.Column="0" Height="150" VerticalAlignment="Top" Width="150"/>
+                        <TextBlock x:Name="userName" Style="{StaticResource SubtitleStyle}" Margin="0, 10, 10, 10" TextWrapping="Wrap" Grid.Column="1" Text="" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                    
                     
                     </Grid>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common
 {
-    class User
+    public class User
     {
         public string UserName { get; set; }
         public int UserId { get; set; }

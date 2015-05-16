@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 using Windows.Storage;
 using Windows.UI.Xaml;
@@ -8,11 +9,14 @@ using Windows.UI.Xaml.Controls;
 
 using AppStudio.Data;
 using AppStudio.Services;
+using Common;
 
 namespace AppStudio.ViewModels
 {
     public class Section2ViewModel : ViewModelBase<Schema1Schema>
     {
+        public static List<Event> Events { get; set; }
+
         private RelayCommandEx<Schema1Schema> itemClickCommand;
         public RelayCommandEx<Schema1Schema> ItemClickCommand
         {

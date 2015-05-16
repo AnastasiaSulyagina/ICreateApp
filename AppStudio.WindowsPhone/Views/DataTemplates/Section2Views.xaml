@@ -37,7 +37,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2" />
-                    <TextBlock Grid.Row="1" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding Subtitle}"/>                    
+                    <TextBlock Grid.Row="1" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding Description}"/>                    
                 </Grid>
             </Grid>
         </Grid>

@@ -1,6 +1,6 @@
 using AppStudio.Services;
 using AppStudio.ViewModels;
-
+using Common;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -57,6 +57,16 @@ namespace AppStudio.Views
             {
                 Main1Model.GetShareContent(args.Request);
             }
+        }
+
+        private void AppBarButton_Click_1(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            
+        }
+
+        private void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
         }
     }
 }
