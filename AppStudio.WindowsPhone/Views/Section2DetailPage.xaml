@@ -27,9 +27,6 @@
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
             <FlipViewItem Style="{StaticResource FlipItemStyle}" ContentTemplate="{StaticResource View1DetailDetail}" Content="{Binding SelectedItem}" />
-            <FlipViewItem Style="{StaticResource FlipItemStyle}" ContentTemplate="{StaticResource View2DetailDetail}" Content="{Binding SelectedItem}" />
-            <FlipViewItem Style="{StaticResource FlipItemStyle}" ContentTemplate="{StaticResource View3DetailDetail}" Content="{Binding SelectedItem}" />
-            <FlipViewItem Style="{StaticResource FlipItemStyle}" ContentTemplate="{StaticResource View4DetailDetail}" Content="{Binding SelectedItem}" />
         </FlipView>
 
     </Grid>

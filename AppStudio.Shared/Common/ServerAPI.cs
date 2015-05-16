@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using System.IO;
 
 namespace Common
 {
@@ -97,9 +98,52 @@ namespace Common
 
         }
 
-        public static async void UploadPicture()
+        public static async void UploadPicture(string picUrl) // waiting for server
         {
-        
+            //var someClient = new HttpClient();
+            //someClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
+            //string sdata;
+            //var fileIds = new string[0];
+            //var link = "";
+            //var ID = "";
+
+            //var url = await someClient.GetStringAsync(new Uri(SiteUrl + "api/Endpoints/GetUploadUrl/UpdateUserPic"));
+            //url = url.Trim(new char[] { '\"' }).TrimStart(new char[] { '/' });
+
+            //using (var client = new HttpClient())
+            //{
+            //    MultipartFormDataContent form = new MultipartFormDataContent();
+
+            //    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + CurrentUser.token);
+            //    var fs = new System.IO.MemoryStream();//костыль, не вышло FileStream(picUrl, FileMode.Open);
+
+
+            //    form.Add(new StreamContent(fs), "file", "file.jpg");
+            //    var response = await client.PostAsync(SiteUrl + url, form);
+            //    sdata = await response.Content.ReadAsStringAsync();
+            //}
+            //using (var client = new HttpClient())
+            //{
+            //    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + CurrentUser.token);
+            //    var content = new StringContent(sdata, Encoding.UTF8, "application/json");
+            //    var response = await client.PostAsync(SiteUrl + "api/Endpoints/SaveUploadedFile/UpdateUserPic", content);
+            //    sdata = await response.Content.ReadAsStringAsync();
+            //    var smth = JObject.Parse(sdata);
+            //    ID = smth["Id"].Value<string>();
+            //    link = smth["Url"].Value<string>();
+            //}
+
+            //try
+            //{
+            //    var data = JsonConvert.SerializeObject(new
+            //    {
+            //        UserFileId = ID
+            //    });
+            //    var content = new StringContent(data, Encoding.UTF8, "application/json");
+            //    var result = await someClient.PostAsync(SiteUrl + "api/Account/UpdateUserPic", content);
+            //}
+            //catch (Exception e)
+            //{}
         }
 
         public static async Task<string> GetEvents()
@@ -115,13 +159,44 @@ namespace Common
             var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
             return result;
         }
-        public static async void AddComment()
+
+        public static async void AddComment(string text) // not tested
         {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
+            try
+            {
+                var data = JsonConvert.SerializeObject(new
+                {
+                    CommentId = 0,
+                    UserId = CurrentUser.id,
+                    Text = text,
+                    DateTime = DateTime.Now
+                });
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var result = await client.PostAsync(SiteUrl + AddCommentUrl, content);
+            }
+            catch (Exception e)
+            {}
 
         }
-        public static async void Follow()
+        public static async void Follow(string name) // not tested
         {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
 
+            try
+            {
+                var data = JsonConvert.SerializeObject(new
+                {
+                    SubscribedTo = name,
+                });
+
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var result = await client.PostAsync(SiteUrl + SubscribeUrl + '/', content);
+            }
+            catch (Exception e)
+            { }
         }
         
     }

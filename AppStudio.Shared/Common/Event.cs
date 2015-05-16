@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common
 {
-    class Event
+    public class Event
     {
         private User Organizer { get; set; }
         private int Id { get; set; }
@@ -18,7 +18,7 @@ namespace Common
         private double Longitude { get; set; }
         private List<Comment> comments { get; set; }
 
-        public Event(DateTime time, double latitude, double longitude, String description, int category)
+        public Event(DateTime time, double latitude, double longitude, String description, int category, User organizer)
         {
             Id = 0;
             //MySquareDescriprion = "";
@@ -41,6 +41,7 @@ namespace Common
             Description = description;
             Category = category;
             ShortDescription = Description;
+            Organizer = organizer;
             //this.Coordinate = new GeoCoordinate(latitude, longitude);
         }
     }
