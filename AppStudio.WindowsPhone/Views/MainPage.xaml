@@ -6,22 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>
-        <Rectangle Height="70" Width="1080" Fill="{StaticResource AppBarForeground}"></Rectangle>
+        
         <Hub x:Name="Container" Grid.Row="1" Background="{StaticResource AppBarBackground}" Margin="0,30,0,-34.666"
              DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeader}">
+            
             <HubSection x:Name="MenuSection" Width="440" Header="меню" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section1Model}"
-				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/DataSource1DataSource.json, Type=vm:Section1ViewModel}"
 				ContentTemplate="{StaticResource MenuList}" IsHeaderInteractive="{Binding HasMoreItems}" />
             <HubSection x:Name="EventsSection" Width="440" Header="список событий"
                         HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:Name="eventList" HorizontalAlignment="Left"
                               Height="592" Margin="0,0,50,0" VerticalAlignment="Top" Width="460"
-                              ItemsSource="{Binding Events}">
+                              ItemsSource="{Binding Events}" IsItemClickEnabled="True"
+                              ItemClick="eventList_ItemClick">
                         <ListView.ItemTemplate> 
                             <DataTemplate>    <!--item-->
                                 <Border Margin="0,0,0,5" BorderThickness="1" Background="#e6e6e6">
@@ -36,10 +38,10 @@
 
                                         </StackPanel>
                                         <!--/авка + юсернэйм-->
-                                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#FF21201E"/>
+                                        <TextBlock Text="{Binding ShortDescription}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#FF21201E"/>
                                         <Grid Margin="0,0,0,0">
                                             <Grid Margin="0,10,0,0" HorizontalAlignment="Left">
-                                                <TextBlock Text="{Binding LocationCaption}" TextWrapping="Wrap" Margin="5,5,5,5" Foreground="#c0392b"/>
+                                                <TextBlock Text="{Binding ShortLocationCaption}" TextWrapping="Wrap" Margin="5,5,5,5" Foreground="#c0392b"/>
                                             </Grid>
                                             <Grid Margin="0,10,0,0" HorizontalAlignment="Right">
                                                 <TextBlock Text="{Binding EventDate}" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,5,5,5" Foreground="#c0392b"/>
@@ -68,9 +70,63 @@
                 
                 
             </HubSection>
-            <HubSection x:Name="MapSection" Width="440" Header="карта" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.HtmlModel}"
-				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/HtmlDataSource.json, Type=vm:HtmlViewModel}"
-				ContentTemplate="{StaticResource Map}" IsHeaderInteractive="{Binding HasMoreItems}" />
-        </Hub>
+            <HubSection x:Name="MapSection" Width="440" Header="карта" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}"
+				        IsHeaderInteractive="{Binding HasMoreItems}" >
+                <DataTemplate>
+                    <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
+                                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,60,50"
+                                     Center="{Binding MapCenter}" ZoomLevel="5">
+                        <Maps:MapItemsControl ItemsSource="{Binding Events}">
+                            <Maps:MapItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Grid Background="White" Visibility="{Binding isVisible}"> <!--всплывающее окно Pushpin'а о событии-->
+                                            <Border Margin="0,0,0,5" BorderThickness="1" Background="#e6e6e6">
+                                                <StackPanel Margin="1,1,1,1" Background="White" Width="150">
+                                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                                        <!--авка + юсернэйм-->
+                                                        <Image Margin="5,5,0,5" Height="20" Source="/Assets/DataImages/nastya.jpg"/>
+                                                        <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                                                            <TextBlock Text="{Binding User.UserName}" TextWrapping="Wrap" Margin="5,5,5,5" Foreground="#c0392b" FontSize="9"/>
+                                                            <TextBlock Text="{Binding DateCreate}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#bdc3c7" FontSize="8" />
+                                                        </StackPanel>
+
+                                                    </StackPanel>
+                                                    <!--/авка + юсернэйм-->
+                                                    <TextBlock Text="{Binding ShortDescription}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#FF21201E" FontSize="12"/>
+                                                    <Grid Margin="0,0,0,0">
+                                                        <Grid Margin="0,10,0,0" HorizontalAlignment="Right">
+                                                            <TextBlock Text="{Binding EventDate}" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,5,5,5" Foreground="#c0392b"/>
+                                                        </Grid>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>  <!--/всплывающее окно Pushpin'а о событии-->
+                                        <Image Maps:MapControl.Location="{Binding Geopoint}" Tapped="Pushpin_Tap"
+                                               Source="/Assets/map_marker.png" Height="25" MaxWidth="50"
+                                               Maps:MapControl.NormalizedAnchorPoint="{Binding AnchorPoint}">
+                                        </Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Maps:MapItemsControl.ItemTemplate>
+                        </Maps:MapItemsControl>
+                    </Maps:MapControl>
+                </DataTemplate>
+            </HubSection>
+        </Hub>        
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar  Opacity="0.8" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}"
+                     Foreground="{StaticResource AppBarForeground}">
+            <AppBarButton x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}"
+                          Command="{Binding MainViewModel.EditPictureCommand}"
+                          Visibility="{Binding RefreshVisibility}" Label="настройки" Click="AppBarButton_Click_2"/>
+            <AppBarButton x:Uid="AddEventButton" Icon="Add" DataContext="{Binding MainViewModel}"
+                          Command="{Binding MainViewModel.AddEventCommand}"
+                          Visibility="{Binding RefreshVisibility}" Label="создать" Click="AppBarButton_Click"/>
+            <AppBarButton x:Uid="LogOutButton" Icon="BlockContact" DataContext="{Binding MainViewModel}"
+                          Command="{Binding MainViewModel.LoginCommand}"
+                          Visibility="{Binding RefreshVisibility}" Label="выход" Click="AppBarButton_Click_1"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

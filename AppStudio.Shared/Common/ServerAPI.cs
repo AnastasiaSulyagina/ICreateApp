@@ -71,7 +71,7 @@ namespace Common
             return true;
         }
 
-        public static async void AddEvent(string description, DateTime datetime)
+        public static async void AddEvent(string description, BasicGeoposition eventPlace, DateTime datetime)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
@@ -79,8 +79,8 @@ namespace Common
             {
                 var data = JsonConvert.SerializeObject(new
                 {
-                    Latitude = coordinate.Latitude.ToString().Replace(",", "."),
-                    Longitude = coordinate.Longitude.ToString().Replace(",", "."),
+                    Latitude = eventPlace.Latitude.ToString().Replace(",", "."),
+                    Longitude = eventPlace.Longitude.ToString().Replace(",", "."),
                     Description = description,
                     EventDate = datetime.ToString()
                 });

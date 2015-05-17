@@ -3,13 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Key="PageHeaderText">
-        <Grid Margin="12,0,0,0">
+        <Grid Margin="0,0,0,0" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Rectangle VerticalAlignment="Top"  Height="70" Margin="0,0,-861.667,0" Width="1080" Fill="{StaticResource AppBarForeground}" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
             <Image Margin="0" Source="{StaticResource AppLogoImage}" Width="70" Height="70" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Grid.Column="1" Text="{StaticResource AppTitle}" Style="{StaticResource AppTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="false" TextWrapping="NoWrap" />
+            <TextBlock Text="{StaticResource AppTitle}" Style="{StaticResource AppTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="false" TextWrapping="NoWrap" Grid.ColumnSpan="2" Margin="70,11,0,11" Width="138" />
         </Grid>
     </DataTemplate>
     <Style x:Key="FlipItemStyle" TargetType="FlipViewItem">
@@ -23,6 +24,6 @@
         <Image Source="{StaticResource HeaderImage}" Height="80" Stretch="Uniform"/>
     </DataTemplate>
     <DataTemplate x:Name="PageHeader">
-        <ContentPresenter ContentTemplate="{StaticResource PageHeaderText}"/>
+        <ContentPresenter ContentTemplate="{StaticResource PageHeaderText}" Width="210"/>
     </DataTemplate>
 </ResourceDictionary>

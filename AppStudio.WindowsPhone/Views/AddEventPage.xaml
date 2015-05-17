@@ -8,56 +8,105 @@
     xmlns:controls="using:AppStudio.Controls"
     xmlns:html2xaml="using:AppStudio.Controls.Html2Xaml"
     xmlns:vm="using:AppStudio.ViewModels"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d"
-    Background="{StaticResource AppBackground}">
+    Background="{StaticResource AppBackground}"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid x:Name="mainFrame" DataContext="{Binding}">
 
-        <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
-            <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
-        </Border>
+        <Grid  Margin="20,80,20,20" Background="#c0392b">
+            <TextBlock Text="Выбирите место события." Style="{StaticResource PageTitleStyle}" HorizontalAlignment="Center"/>
+            <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
+                             MapTapped="mapTapped"
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Center="{Binding MapCenter}" ZoomLevel="10"
+                             Margin="10,5,10,5" Height="380" Width="375">
+                <Maps:MapItemsControl>
+                    <Image x:Name="PushPin" Source="/Assets/map_marker.png" Height="25" MaxWidth="50"
+                           Maps:MapControl.NormalizedAnchorPoint="0.5,1"/>
+                </Maps:MapItemsControl>
+            </Maps:MapControl>
+            <Button Click="setLocation_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                    OK
+                </Button>
+        </Grid>
 
-        <TextBlock x:Uid="AboutSection" Margin="12,0" Grid.Row="1"  Text="новое событие" Style="{StaticResource PageTitleStyle}" />
-
-        <Grid Grid.Row="2" DataContext="{Binding AboutModel}"
-              d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
+        <Grid x:Name="textFrame" Background="#e6e6e6">
             <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer Grid.Row="0" Margin="10,0" Height="642" VerticalAlignment="Top"
-                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-            <TextBox x:Name="DescriptionBox" Height="457" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" BorderThickness="2.5" Foreground="{Binding Source={StaticResource TitleForeground}}"/>
-            <Button Content="создать" Margin="10,10,10,10" Height="83" Width="195" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Click="Button_Click"/>
+            <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
+                <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
+            </Border>
 
-                </StackPanel>
-            </ScrollViewer>
-            
+            <TextBlock x:Uid="AboutSection" Margin="12,0" Grid.Row="1"  Text="новое событие" Style="{StaticResource PageTitleStyle}" />
+
+            <Grid Grid.Row="2" DataContext="{Binding AboutModel}"  
+              d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer Grid.Row="0" Margin="10,0" Height="450" VerticalAlignment="Top"
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBox x:Name="DescriptionBox" Height="350" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}"
+                        Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White"
+                        BorderThickness="2.5" Foreground="{Binding Source={StaticResource TitleForeground}}"/>
+                        <Button Content="Cоздать" Margin="10,10,10,10" Height="83" Width="195" HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}"
+                                Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Click="Create_Click"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
         </Grid>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar  Opacity="1.0"  Visibility="Visible" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
-            <AppBarButton x:Uid="AddEventButton"  DataContext="{Binding MainViewModel.SelectedItem}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}" Label="категория">
+            <!--<AppBarButton x:Uid="AddEventButton"  DataContext="{Binding MainViewModel.SelectedItem}"
+                        Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}" Label="категория">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/DataImages/ApplicationBar.Select.png"/>
                 </AppBarButton.Icon>
-            </AppBarButton>
-            <AppBarButton x:Uid="SettingsButton" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="место">
+            </AppBarButton>-->
+            <AppBarButton x:Name="LocationButton" DataContext="{Binding MainViewModel}" Click="showMap_Click"
+                          Visibility="{Binding RefreshVisibility}" Label="место">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/DataImages/location.png"/>
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Uid="LogOutButton" Icon="Clock" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="дата\время"/>
-            <AppBarButton x:Uid="LogOutButton" Icon="Camera" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="фото"/>
+
+            <AppBarButton x:Name="DateTimeButton" Icon="Clock" DataContext="{Binding MainViewModel}"
+                          Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="дата\время">
+                <Button.Flyout>
+                    <Flyout Placement="Full">
+                        <Flyout.FlyoutPresenterStyle>
+                            <Style TargetType="FlyoutPresenter">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </Flyout.FlyoutPresenterStyle>
+
+                        <StackPanel Margin="20,350,20,50" Background="#c0392b">
+                            <DatePicker x:Name="eventDatePicker" Header="Дата События" Width="300" HorizontalAlignment="Center"/>
+                            <TimePicker x:Name="eventTimePicker" Header="Время Проведения" Width="300" HorizontalAlignment="Center"/>
+                            <Button Click="setDateTime_Click" HorizontalAlignment="Center">
+                                OK
+                            </Button>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </AppBarButton>
+
+            <AppBarButton x:Uid="LogOutButton" Icon="Camera" DataContext="{Binding MainViewModel}"
+                          Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}" Label="фото"/>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

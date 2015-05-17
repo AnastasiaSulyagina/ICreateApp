@@ -73,6 +73,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\ErrorImage.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\map_marker.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\FlipSquareTile.png">
