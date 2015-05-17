@@ -6,21 +6,26 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net.NetworkInformation;
 
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Background;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using Common;
 using AppStudio.Services;
 using AppStudio.ViewModels;
 
@@ -28,6 +33,13 @@ namespace AppStudio.Views
 {
     public sealed partial class MainPage : Page
     {
+        public string EventString { get; set; }
+        private MainViewModel _mainViewModel = null;
+
+        private NavigationHelper _navigationHelper;
+
+        private DataTransferManager _dataTransferManager;
+
         private ObservableCollection<Common.Event> eEvents = new ObservableCollection<Common.Event>();
         public ObservableCollection<Common.Event> Events
         {
@@ -44,8 +56,18 @@ namespace AppStudio.Views
 
         public MainPage()
         {
+            CurrentUser.PictureUrl = "ms-appx:///Assets/DataImages/nastya.jpg";
+            Section1ViewModel.UserName = CurrentUser.UserName;
+            Section1ViewModel.PictureUrl = CurrentUser.PictureUrl;
             this.InitializeComponent();
             update();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            _navigationHelper = new NavigationHelper(this);
+
+            _mainViewModel = _mainViewModel ?? new MainViewModel();
+
+            ApplicationView.GetForCurrentView().
+                SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
 
 
         }
@@ -64,13 +86,17 @@ namespace AppStudio.Views
                 try
                 {
                     JsnString = await Common.ServerAPI.GetEvents();
-                    Geoposition geoposition = await geolocator.GetGeopositionAsync(
-                        maximumAge: TimeSpan.FromMinutes(5),
+                    /*Geoposition geoposition = await geolocator.GetGeopositionAsync(
+                        maximumAge: TimeSpan.FromMinutes(1),
                         timeout: TimeSpan.FromSeconds(10)
                     );
                     currentGeo.Latitude = geoposition.Coordinate.Latitude;
                     currentGeo.Longitude = geoposition.Coordinate.Longitude;
+                    
+                    string s = (this.MapSection.FindName("myMapControl") as MapControl).MapServiceToken;
                     MapCenter = new Geopoint(currentGeo);
+                    (this.MapSection.FindName("myMapControl") as MapControl).Center = MapCenter;*/
+                    
                 }
                 catch
                 {
@@ -102,15 +128,51 @@ namespace AppStudio.Views
             await Task.Delay(1000);
             return 1;
         }
+        public MainViewModel MainViewModel
+        {
+            get { return _mainViewModel; }
+        }
+
+        public NavigationHelper NavigationHelper
+        {
+            get { return _navigationHelper; }
+        }
+        private void OnSectionsInViewChanged(object sender, SectionsInViewChangedEventArgs e)
+        {
+            var selectedSection = Container.SectionsInView.FirstOrDefault();
+            if (selectedSection != null)
+            {
+                MainViewModel.SelectedItem = selectedSection.DataContext as ViewModelBase;
+            }
+        }
 
         /// <summary>
         /// Вызывается перед отображением этой страницы во фрейме.
         /// </summary>
         /// <param name="e">Данные события, описывающие, каким образом была достигнута эта страница.
         /// Этот параметр обычно используется для настройки страницы.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            _dataTransferManager = DataTransferManager.GetForCurrentView();
+            _dataTransferManager.DataRequested += OnDataRequested;
+            _navigationHelper.OnNavigatedTo(e);
+            await MainViewModel.LoadDataAsync();
             
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _navigationHelper.OnNavigatedFrom(e);
+            _dataTransferManager.DataRequested -= OnDataRequested;
+        }
+
+        private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            var viewModel = MainViewModel.SelectedItem;
+            if (viewModel != null)
+            {
+                viewModel.GetShareContent(args.Request);
+            }
         }
 
         private void Pushpin_Tap(object sender, RoutedEventArgs e)

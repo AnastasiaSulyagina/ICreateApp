@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:vm="using:AppStudio.ViewModels"
     xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
@@ -14,8 +15,9 @@
         
         <Hub x:Name="Container" Grid.Row="1" Background="{StaticResource AppBarBackground}" Margin="0,30,0,-34.666"
              DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeader}">
-            
+
             <HubSection x:Name="MenuSection" Width="440" Header="меню" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section1Model}"
+				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/DataSource1DataSource.json, Type=vm:Section1ViewModel}"
 				ContentTemplate="{StaticResource MenuList}" IsHeaderInteractive="{Binding HasMoreItems}" />
             <HubSection x:Name="EventsSection" Width="440" Header="список событий"
                         HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
@@ -75,7 +77,7 @@
                 <DataTemplate>
                     <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,60,50"
-                                     Center="{Binding MapCenter}" ZoomLevel="5">
+                                     ZoomLevel="5">
                         <Maps:MapItemsControl ItemsSource="{Binding Events}">
                             <Maps:MapItemsControl.ItemTemplate>
                                 <DataTemplate>

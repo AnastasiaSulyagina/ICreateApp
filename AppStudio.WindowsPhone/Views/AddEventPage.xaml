@@ -19,11 +19,12 @@
             <TextBlock Text="Выбирите место события." Style="{StaticResource PageTitleStyle}" HorizontalAlignment="Center"/>
             <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
                              MapTapped="mapTapped"
-                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Center="{Binding MapCenter}" ZoomLevel="10"
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Center="{Binding MapCenter}" ZoomLevel="5"
                              Margin="10,5,10,5" Height="380" Width="375">
                 <Maps:MapItemsControl>
                     <Image x:Name="PushPin" Source="/Assets/map_marker.png" Height="25" MaxWidth="50"
-                           Maps:MapControl.NormalizedAnchorPoint="0.5,1"/>
+                           Maps:MapControl.NormalizedAnchorPoint="0.5,1"
+                           Maps:MapControl.Location="{Binding eventGeopoint}"/>
                 </Maps:MapItemsControl>
             </Maps:MapControl>
             <Button Click="setLocation_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center">

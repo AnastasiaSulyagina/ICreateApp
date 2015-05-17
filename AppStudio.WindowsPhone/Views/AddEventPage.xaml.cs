@@ -50,7 +50,7 @@ namespace AppStudio.Views
         private void mapTapped(object sender, MapInputEventArgs e)
         {
             eventGeopoint = new Geopoint(e.Location.Position);
-
+            geoposition = e.Location.Position;
             //MapControl.SetLocation(PushPin, eventGeopoint);
         }
         
@@ -71,18 +71,16 @@ namespace AppStudio.Views
             textFrame.Visibility = Visibility.Visible;
         }
 
-        private void newCommentBox(object sender, RoutedEventArgs e)
-        {
-            DateTimeButton.Flyout.Hide();
-        }
 
         private void setDateTime_Click(object sender, RoutedEventArgs e)
         {
             DateTimeButton.Flyout.Hide();
+            var date = eventDatePicker.Date.DateTime;
+            var time = eventTimePicker.Time;
+            EventDateTime = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
         }
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            EventDateTime = new DateTime(2008, 5, 1, 8, 30, 52);
             if (!CurrentUser.isAuthorized)
             {
                 NavigationServices.NavigateToPage("LoginPage");
