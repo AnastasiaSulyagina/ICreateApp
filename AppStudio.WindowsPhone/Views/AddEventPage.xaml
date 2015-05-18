@@ -15,16 +15,23 @@
 
     <Grid x:Name="mainFrame" DataContext="{Binding}">
 
+
         <Grid  Margin="20,80,20,20" Background="#c0392b">
             <TextBlock Text="Выбирите место события." Style="{StaticResource PageTitleStyle}" HorizontalAlignment="Center"/>
             <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
                              MapTapped="mapTapped"
                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Center="{Binding MapCenter}" ZoomLevel="5"
                              Margin="10,5,10,5" Height="380" Width="375">
-                <Maps:MapItemsControl>
-                    <Image x:Name="PushPin" Source="/Assets/map_marker.png" Height="25" MaxWidth="50"
-                           Maps:MapControl.NormalizedAnchorPoint="0.5,1"
-                           Maps:MapControl.Location="{Binding eventGeopoint}"/>
+                <Maps:MapItemsControl ItemsSource="{Binding Events}">
+                    <Maps:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Image Maps:MapControl.Location="{Binding Geopoint}"
+                                               Source="/Assets/map_marker.png" Height="25" MaxWidth="50"
+                                               Maps:MapControl.NormalizedAnchorPoint="{Binding AnchorPoint}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Maps:MapItemsControl.ItemTemplate>
                 </Maps:MapItemsControl>
             </Maps:MapControl>
             <Button Click="setLocation_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center">
@@ -39,14 +46,14 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
-                <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
+            <Border x:Name="HeaderHost" Height="75" Background="{Binding Source={StaticResource AppBarForeground}}" VerticalAlignment="Top">
+                <ContentPresenter ContentTemplate="{StaticResource PageHeaderNew}" />
             </Border>
 
-            <TextBlock x:Uid="AboutSection" Margin="12,0" Grid.Row="1"  Text="новое событие" Style="{StaticResource PageTitleStyle}" />
+            <TextBlock Margin="12,0" Grid.Row="1"  Text="новое событие" Style="{StaticResource PageTitleStyle}" />
 
             <Grid Grid.Row="2" DataContext="{Binding AboutModel}"  
-              d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
+                  d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -60,9 +67,25 @@
                         <TextBox x:Name="DescriptionBox" Height="350" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}"
                         Margin="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White"
                         BorderThickness="2.5" Foreground="{Binding Source={StaticResource TitleForeground}}"/>
-                        <Button Content="Cоздать" Margin="10,10,10,10" Height="83" Width="195" HorizontalAlignment="Right"
+                        <Button x:Name="CreateButton" Content="Cоздать" Margin="10,10,10,10" Height="83" Width="195" HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}"
-                                Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Click="Create_Click"/>
+                                Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Click="Create_Click">
+                            <Button.Flyout>
+                                <Flyout Placement="Full">
+                                    <Flyout.FlyoutPresenterStyle>
+                                        <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Style>
+                                    </Flyout.FlyoutPresenterStyle>
+                                    <StackPanel x:Name="ErrorBox" HorizontalAlignment="Center" VerticalAlignment="Center" Height="78" Width="353" Background="#c0392b">
+                                        <TextBlock x:Name="ErrorText" Text="Введите описание вашего события." HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
+                                    <Button Click="HideError_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        OK
+                                    </Button>
+                                </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
 
                     </StackPanel>
                 </ScrollViewer>

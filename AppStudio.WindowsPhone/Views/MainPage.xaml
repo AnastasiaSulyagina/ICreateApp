@@ -8,12 +8,11 @@
     mc:Ignorable="d"
     xmlns:vm="using:AppStudio.ViewModels"
     xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="{StaticResource AppBackground}"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
-
     <Grid>
-        
-        <Hub x:Name="Container" Grid.Row="1" Background="{StaticResource AppBarBackground}" Margin="0,30,0,-34.666"
+
+        <Hub x:Name="Container" Background="{StaticResource AppBarBackground}" Margin="0,30,0,0"
              DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeader}">
 
             <HubSection x:Name="MenuSection" Width="440" Header="меню" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section1Model}"
@@ -23,16 +22,17 @@
                         HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:Name="eventList" HorizontalAlignment="Left"
-                              Height="592" Margin="0,0,50,0" VerticalAlignment="Top" Width="460"
+                              Height="490" Margin="0,0,0,0" VerticalAlignment="Top" Width="460"
                               ItemsSource="{Binding Events}" IsItemClickEnabled="True"
-                              ItemClick="eventList_ItemClick">
-                        <ListView.ItemTemplate> 
-                            <DataTemplate>    <!--item-->
+                              ItemClick="eventList_ItemClick" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <!--item-->
                                 <Border Margin="0,0,0,5" BorderThickness="1" Background="#e6e6e6">
                                     <StackPanel Margin="1,1,1,1" Background="White" Width="350">
                                         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                             <!--авка + юсернэйм-->
-                                            <Image Margin="5,5,0,5" Height="35" Source="/Assets/DataImages/nastya.jpg"/>
+                                            <Image Margin="5,5,0,5" Height="35" Source="{Binding User.Photo}"/>
                                             <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
                                                 <TextBlock Text="{Binding User.UserName}" TextWrapping="Wrap" Margin="5,5,5,5" Foreground="#c0392b" />
                                                 <TextBlock Text="{Binding DateCreate}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#bdc3c7" FontSize="10" />
@@ -64,30 +64,32 @@
                                         </Grid>
                                     </StackPanel>
                                 </Border>
-                            </DataTemplate>   <!--/item-->
+                            </DataTemplate>
+                            <!--/item-->
                         </ListView.ItemTemplate>
                     </ListView>
-                    
+
                 </DataTemplate>
-                
-                
+
+
             </HubSection>
             <HubSection x:Name="MapSection" Width="440" Header="карта" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}"
 				        IsHeaderInteractive="{Binding HasMoreItems}" >
                 <DataTemplate>
                     <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,60,50"
-                                     ZoomLevel="5">
+                                     ZoomLevel="2">
                         <Maps:MapItemsControl ItemsSource="{Binding Events}">
                             <Maps:MapItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <Grid Background="White" Visibility="{Binding isVisible}"> <!--всплывающее окно Pushpin'а о событии-->
+                                        <Grid Background="White" Visibility="{Binding isVisible}">
+                                            <!--всплывающее окно Pushpin'а о событии-->
                                             <Border Margin="0,0,0,5" BorderThickness="1" Background="#e6e6e6">
                                                 <StackPanel Margin="1,1,1,1" Background="White" Width="150">
                                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                                         <!--авка + юсернэйм-->
-                                                        <Image Margin="5,5,0,5" Height="20" Source="/Assets/DataImages/nastya.jpg"/>
+                                                        <Image Margin="5,5,0,5" Height="20" Source="{Binding User.Photo}"/>
                                                         <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
                                                             <TextBlock Text="{Binding User.UserName}" TextWrapping="Wrap" Margin="5,5,5,5" Foreground="#c0392b" FontSize="9"/>
                                                             <TextBlock Text="{Binding DateCreate}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#bdc3c7" FontSize="8" />
@@ -103,7 +105,8 @@
                                                     </Grid>
                                                 </StackPanel>
                                             </Border>
-                                        </Grid>  <!--/всплывающее окно Pushpin'а о событии-->
+                                        </Grid>
+                                        <!--/всплывающее окно Pushpin'а о событии-->
                                         <Image Maps:MapControl.Location="{Binding Geopoint}" Tapped="Pushpin_Tap"
                                                Source="/Assets/map_marker.png" Height="25" MaxWidth="50"
                                                Maps:MapControl.NormalizedAnchorPoint="{Binding AnchorPoint}">
@@ -115,10 +118,10 @@
                     </Maps:MapControl>
                 </DataTemplate>
             </HubSection>
-        </Hub>        
+        </Hub>
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar  Opacity="0.8" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}"
+        <CommandBar  ClosedDisplayMode="Compact" Background="#e6e6e6"
                      Foreground="{StaticResource AppBarForeground}">
             <AppBarButton x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}"
                           Command="{Binding MainViewModel.EditPictureCommand}"

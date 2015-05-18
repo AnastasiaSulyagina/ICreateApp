@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -46,8 +47,17 @@ namespace AppStudio.Views
             get { return eEvents; }
             set { eEvents = value; }
         }
+        public class position
+        {
+            public Geopoint MapCenter
+            {
+                get { return mapCenter; }
+                set { mapCenter = value; }
+            }
 
-        public Geopoint MapCenter;
+            private Geopoint mapCenter;
+        }
+        public position geo = new position();
         private BasicGeoposition currentGeo = new BasicGeoposition();
 
         private Geolocator geolocator = new Geolocator();
@@ -56,7 +66,7 @@ namespace AppStudio.Views
 
         public MainPage()
         {
-            CurrentUser.PictureUrl = "ms-appx:///Assets/DataImages/nastya.jpg";
+            CurrentUser.PictureUrl = "ms-appx:///Assets/user.jpg";
             Section1ViewModel.UserName = CurrentUser.UserName;
             Section1ViewModel.PictureUrl = CurrentUser.PictureUrl;
             this.InitializeComponent();
@@ -68,11 +78,35 @@ namespace AppStudio.Views
 
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
-
-
         }
-        
 
+        /*private DependencyObject FindChildControl<T>(DependencyObject control, string ctrlName)
+        {
+            int childNumber = VisualTreeHelper.GetChildrenCount(control);
+            for (int i = 0; i < childNumber; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(control, i);
+                FrameworkElement fe = child as FrameworkElement;
+                // Not a framework element or is null
+                if (fe == null) return null;
+
+                if (child is T && fe.Name == ctrlName)
+                {
+                    // Found the control so return
+                    return child;
+                }
+                else
+                {
+                    // Not found it - search children
+                    DependencyObject nextLevel = FindChildControl<T>(child, ctrlName);
+                    if (nextLevel != null)
+                        return nextLevel;
+                }
+            }
+            return null;
+        }
+        */
+        
         private async void update()
         {
             
@@ -92,9 +126,8 @@ namespace AppStudio.Views
                     );
                     currentGeo.Latitude = geoposition.Coordinate.Latitude;
                     currentGeo.Longitude = geoposition.Coordinate.Longitude;
-                    
-                    string s = (this.MapSection.FindName("myMapControl") as MapControl).MapServiceToken;
-                    MapCenter = new Geopoint(currentGeo);
+
+                    geo.MapCenter = new Geopoint(currentGeo);
                     (this.MapSection.FindName("myMapControl") as MapControl).Center = MapCenter;*/
                     
                 }

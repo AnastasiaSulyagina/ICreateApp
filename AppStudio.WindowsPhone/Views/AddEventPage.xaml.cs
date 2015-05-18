@@ -1,7 +1,7 @@
 ﻿using AppStudio.Services;
 using Common;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,13 +27,28 @@ namespace AppStudio.Views
     /// </summary>
     public sealed partial class AddEventPage : Page
     {
-        private DateTime EventDateTime;
+        private DateTime EventDateTime = new DateTime();
         private BasicGeoposition geoposition = new BasicGeoposition();
         public Geopoint eventGeopoint;
+
+        private ObservableCollection<Common.Event> eEvents = new ObservableCollection<Common.Event>();
+        public ObservableCollection<Common.Event> Events
+        {
+            get { return eEvents; }
+            set { eEvents = value; }
+        }
+
         //public Decimal isMapVisible;
         public AddEventPage()
         {
             this.InitializeComponent();
+
+            geoposition.Altitude = 0.0;
+            geoposition.Latitude = 59.880147;
+            geoposition.Longitude = 29.828944;
+
+            EventDateTime = DateTime.Now;
+
             //isMapVisible = new Decimal(1);
         }
 
@@ -51,6 +66,8 @@ namespace AppStudio.Views
         {
             eventGeopoint = new Geopoint(e.Location.Position);
             geoposition = e.Location.Position;
+            eEvents.Clear();
+            eEvents.Add((new Common.Event(1, "", new User(""), new DateTime(2008, 1, 1, 1, 1, 1), new DateTime(2008, 1, 1, 1, 1, 1), geoposition.Latitude, geoposition.Longitude, "")));
             //MapControl.SetLocation(PushPin, eventGeopoint);
         }
         
@@ -59,6 +76,12 @@ namespace AppStudio.Views
             mapShow();
 
         }
+        private void HideError_Click(object sender, RoutedEventArgs e)
+        {
+            CreateButton.Flyout.Hide();
+
+        }
+        
 
         public void mapShow()
         {
@@ -87,7 +110,12 @@ namespace AppStudio.Views
             }
             else 
             {
-                ServerAPI.AddEvent(DescriptionBox.Text, geoposition, EventDateTime);
+                if (DescriptionBox.Text != "")
+                {
+                    ErrorText.Text = "Событие создано";
+                    ServerAPI.AddEvent(DescriptionBox.Text, geoposition, EventDateTime);
+                    NavigationServices.NavigateToPage("MainPage");
+                }
             }
         }
     }

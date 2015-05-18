@@ -88,7 +88,7 @@ namespace AppStudio.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            ServerAPI.UploadPicture();
+            //ServerAPI.UploadPicture();
         }
     }
 }

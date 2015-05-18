@@ -10,16 +10,17 @@ namespace Common
         public int UserId { get; set; }
 
         public string Photo { get; set; }
-        //List<User> Friends { get; set; }
+        List<User> Friends { get; set; }
         //string un;
         //int ui;
         //string p;
 
-        public User(string userName, int userId, string photo)
+        public User(string userName = "", int userId = 0, string photo = null)
         {
             UserName = userName;
             UserId = userId;
-            Photo = photo;
+            if (photo == null) Photo = "/Assets/user.jpg";
+            else Photo = photo;
         }
     }
 }

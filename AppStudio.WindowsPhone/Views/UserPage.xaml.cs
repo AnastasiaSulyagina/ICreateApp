@@ -40,7 +40,7 @@ namespace AppStudio.Views
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            ServerAPI.Follow();
+            //ServerAPI.Follow();
         }
 
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)

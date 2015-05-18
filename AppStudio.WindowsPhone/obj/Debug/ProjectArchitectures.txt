@@ -1,2 +1,0 @@
-D:\OneDrive\Code\ПРОЕКТ СКАЧАННОЕ\15.05(3)\AppStudio.Data\AppStudio.Data.csproj;neutral
-D:\OneDrive\Code\ПРОЕКТ СКАЧАННОЕ\15.05(3)\AppStudio.WindowsPhone\AppStudio.WindowsPhone.csproj;neutral
