@@ -3,7 +3,7 @@
     {
       "Type": "Section",
       "Title": "new events",
-      "Icon": "/Assets/DataImages/MenuClock1.png",
+      "Icon": "/Assets/DataImages/MenuClock.png",
       "Target": "StartersPage"
     },
     {

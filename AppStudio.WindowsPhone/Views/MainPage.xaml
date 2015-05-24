@@ -30,10 +30,7 @@
             <HubSection x:Name="EventsSection" Width="440" Header="список событий" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section2Model}"
 				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/DataSource2DataSource.json, Type=vm:Section2ViewModel}"
 				ContentTemplate="{StaticResource Section2List}" IsHeaderInteractive="{Binding HasMoreItems}" />
-            <HubSection x:Name="MapSection" Width="440" Header="карта" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.HtmlModel}"
-				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/HtmlDataSource.json, Type=vm:HtmlViewModel}"
-				ContentTemplate="{StaticResource Map}" IsHeaderInteractive="{Binding HasMoreItems}" />
-        </Hub>
+                    </Hub>
     </Grid>
         <Page.BottomAppBar>
         <CommandBar  Opacity="0.8"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
