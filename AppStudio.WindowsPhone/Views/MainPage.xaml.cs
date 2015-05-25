@@ -1,72 +1,123 @@
-using System;
+﻿using System;
+using System.Windows;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Devices.Geolocation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Background;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Common;
 using AppStudio.Services;
 using AppStudio.ViewModels;
-using Common;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace AppStudio.Views
 {
     public sealed partial class MainPage : Page
     {
-        public string EventString { get; set; }
         private MainViewModel _mainViewModel = null;
 
         private NavigationHelper _navigationHelper;
 
         private DataTransferManager _dataTransferManager;
 
+        private ObservableCollection<Common.Event> eEvents = new ObservableCollection<Common.Event>();
+        public ObservableCollection<Common.Event> Events
+        {
+            get { return eEvents; }
+            set { eEvents = value; }
+        }
+        
+        private BasicGeoposition currentGeo = new BasicGeoposition();
+
+        private Geolocator geolocator = new Geolocator();
+
         public MainPage()
         {
-            update();
-            CurrentUser.PictureUrl = "ms-appx:///Assets/DataImages/nastya.jpg";
+            CurrentUser.PictureUrl = "ms-appx:///Assets/user.jpg";
             Section1ViewModel.UserName = CurrentUser.UserName;
             Section1ViewModel.PictureUrl = CurrentUser.PictureUrl;
             this.InitializeComponent();
-
+            update();
             this.NavigationCacheMode = NavigationCacheMode.Required;
             _navigationHelper = new NavigationHelper(this);
-            
-            _mainViewModel = _mainViewModel ?? new MainViewModel();
 
-            DataContext = this;
+            _mainViewModel = _mainViewModel ?? new MainViewModel();
 
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
-            
         }
-        public async void update()
-        { 
-            EventString = await ServerAPI.GetEvents();
-            Section2ViewModel.Events = JsonConvert.DeserializeObject<List<Event>>(EventString);
-            int c = 0;
-        
+                
+        private async void update()
+        {
+            
+            geolocator.DesiredAccuracyInMeters = 50;
+            var cts = new CancellationTokenSource();
+            var lastString = "";
+            do
+            {
+                string JsnString;
+                try
+                {
+                    JsnString = await Common.ServerAPI.GetEvents();
+                }
+                catch
+                {
+                    continue;
+                }
+
+                var deser = JsonConvert.DeserializeObject<ObservableCollection<Common.Event>>(JsnString);
+
+                if (!lastString.Equals(JsnString))
+                {
+                    eEvents.Clear();
+                    foreach(var elem in deser)
+                    {
+                        eEvents.Add(new Common.Event(elem.EventId, elem.LocationCaption,
+                            new Common.User(elem.User.UserName, elem.User.UserId, elem.User.Photo),
+                                elem.EventDate, elem.DateCreate, elem.Latitude, elem.Longitude, elem.Description));
+                    }
+                }
+                await loop(cts.Token);
+                
+                cts.Cancel();
+                lastString = JsnString;
+            } while (true);
         }
 
+        private async Task<int> loop(CancellationToken ct)
+        {
+            await Task.Delay(1000);
+            return 1;
+        }
         public MainViewModel MainViewModel
         {
             get { return _mainViewModel; }
         }
 
-        /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
-        /// process lifetime management
-        /// </summary>
         public NavigationHelper NavigationHelper
         {
             get { return _navigationHelper; }
         }
-
         private void OnSectionsInViewChanged(object sender, SectionsInViewChangedEventArgs e)
         {
             var selectedSection = Container.SectionsInView.FirstOrDefault();
@@ -75,16 +126,6 @@ namespace AppStudio.Views
                 MainViewModel.SelectedItem = selectedSection.DataContext as ViewModelBase;
             }
         }
-
-        #region NavigationHelper registration
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             _dataTransferManager = DataTransferManager.GetForCurrentView();
@@ -98,7 +139,6 @@ namespace AppStudio.Views
             _navigationHelper.OnNavigatedFrom(e);
             _dataTransferManager.DataRequested -= OnDataRequested;
         }
-        #endregion
 
         private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
@@ -109,9 +149,26 @@ namespace AppStudio.Views
             }
         }
 
+        private void Pushpin_Tap(object sender, RoutedEventArgs e)
+        {
+            Common.Event elem = (Common.Event)((Image)e.OriginalSource).DataContext;
+            if (elem.misVisible == Visibility.Visible) elem.misVisible = Visibility.Collapsed;
+            else elem.misVisible = Visibility.Visible;
+            var index = eEvents.IndexOf(elem);
+            eEvents.Remove(elem);
+            eEvents.Insert(index, elem);
+        }
+
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationServices.NavigateToPage("AddEventPage");
+            if (Common.CurrentUser.isAuthorized)
+            {
+                NavigationServices.NavigateToPage("AddEventPage");
+            }
+            else
+            {
+                NavigationServices.NavigateToPage("LoginPage");
+            }
         }
 
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
@@ -122,6 +179,11 @@ namespace AppStudio.Views
         private void AppBarButton_Click_2(object sender, RoutedEventArgs e)
         {
             NavigationServices.NavigateToPage("PicturePage");
+        }
+
+        private void eventList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            NavigationServices.NavigateToPage("EventPage", e.ClickedItem);
         }
     }
 }

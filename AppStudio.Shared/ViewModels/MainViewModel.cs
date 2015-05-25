@@ -86,8 +86,8 @@ namespace AppStudio.ViewModels
             var loadTasks = new Task[]
             { 
                 Section1Model.LoadItemsAsync(forceRefresh),
-                Section2Model.LoadItemsAsync(forceRefresh),
-                HtmlModel.LoadItemsAsync(forceRefresh),
+                //Section2Model.LoadItemsAsync(forceRefresh),
+                //HtmlModel.LoadItemsAsync(forceRefresh),
             };
             await Task.WhenAll(loadTasks);
         }

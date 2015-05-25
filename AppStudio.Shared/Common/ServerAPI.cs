@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -14,7 +15,7 @@ namespace Common
     public class ServerAPI
     {
         private static BasicGeoposition coordinate = new BasicGeoposition();//59.875585, 29.825813);
-        
+
         private static string LoginUrl = "Token";
         private static string RegisterUrl = "api/Account/Register";
         private static string GetEventsUrl = "api/Events";
@@ -36,9 +37,9 @@ namespace Common
                 var message = result.ReasonPhrase;
                 var responseString = await result.Content.ReadAsStringAsync();
                 var user = JObject.Parse(responseString);
-                
+
                 CurrentUser.Authorize(user["access_token"].Value<string>(), login);
-                
+
             }
             catch (WebException we)
             {
@@ -71,7 +72,7 @@ namespace Common
             return true;
         }
 
-        public static async void AddEvent(string description, DateTime datetime)
+        public static async void AddEvent(string description, BasicGeoposition eventPlace, DateTime datetime)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
@@ -79,8 +80,8 @@ namespace Common
             {
                 var data = JsonConvert.SerializeObject(new
                 {
-                    Latitude = coordinate.Latitude.ToString().Replace(",", "."),
-                    Longitude = coordinate.Longitude.ToString().Replace(",", "."),
+                    Latitude = eventPlace.Latitude.ToString().Replace(",", "."),
+                    Longitude = eventPlace.Longitude.ToString().Replace(",", "."),
                     Description = description,
                     EventDate = datetime.ToString()
                 });
@@ -91,62 +92,102 @@ namespace Common
                 var message = result.ReasonPhrase;
                 var s = await content.ReadAsStringAsync();
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
-                Console.WriteLine(e.ToString());
+                var message = exc.ToString();
             }
 
         }
 
-        // waiting for server
-        //public static async void UploadPicture(string picUrl) 
-        //{
-        //    var someClient = new HttpClient();
-        //    someClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
-        //    string sdata;
-        //    var fileIds = new string[0];
-        //    var link = "";
-        //    var ID = "";
-        //    var url = await someClient.GetStringAsync(new Uri(SiteUrl + "api/Endpoints/GetUploadUrl/UpdateUserPic"));
-        //    url = url.Trim(new char[] { '\"' }).TrimStart(new char[] { '/' });
-        //    using (var client = new HttpClient())
-        //    {
-        //        MultipartFormDataContent form = new MultipartFormDataContent();
-        //        client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + CurrentUser.token);
-        //        var fs = new FileStream(picUrl, FileMode.Open);
-        //        form.Add(new StreamContent(fs), "file", "file.jpg");
-        //        var response = await client.PostAsync(SiteUrl + url, form);
-        //        sdata = await response.Content.ReadAsStringAsync();
-        //    }
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + CurrentUser.token);
-        //        var content = new StringContent(sdata, Encoding.UTF8, "application/json");
-        //        var response = await client.PostAsync(SiteUrl + "api/Endpoints/SaveUploadedFile/UpdateUserPic", content);
-        //        sdata = await response.Content.ReadAsStringAsync();
-        //        var smth = JObject.Parse(sdata);
-        //        ID = smth["Id"].Value<string>();
-        //        link = smth["Url"].Value<string>();
-        //    }
-        //    try
-        //    {
-        //        var data = JsonConvert.SerializeObject(new
-        //        {
-        //            UserFileId = ID
-        //        });
-        //        var content = new StringContent(data, Encoding.UTF8, "application/json");
-        //        var result = await someClient.PostAsync(SiteUrl + "api/Account/UpdateUserPic", content);
-        //    }
-        //    catch (Exception e)
-        //    { }
-        //}
+        public static async void UploadPicture(string picUrl) // waiting for server
+        {
+            //var someClient = new HttpClient();
+            //someClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
+            //string sdata;
+            //var fileIds = new string[0];
+            //var link = "";
+            //var ID = "";
+
+            //var url = await someClient.GetStringAsync(new Uri(SiteUrl + "api/Endpoints/GetUploadUrl/UpdateUserPic"));
+            //url = url.Trim(new char[] { '\"' }).TrimStart(new char[] { '/' });
+
+            //using (var client = new HttpClient())
+            //{
+            //    MultipartFormDataContent form = new MultipartFormDataContent();
+
+            //    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + CurrentUser.token);
+            //    var fs = new System.IO.MemoryStream();//костыль, не вышло FileStream(picUrl, FileMode.Open);
+
+
+            //    form.Add(new StreamContent(fs), "file", "file.jpg");
+            //    var response = await client.PostAsync(SiteUrl + url, form);
+            //    sdata = await response.Content.ReadAsStringAsync();
+            //}
+            //using (var client = new HttpClient())
+            //{
+            //    client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + CurrentUser.token);
+            //    var content = new StringContent(sdata, Encoding.UTF8, "application/json");
+            //    var response = await client.PostAsync(SiteUrl + "api/Endpoints/SaveUploadedFile/UpdateUserPic", content);
+            //    sdata = await response.Content.ReadAsStringAsync();
+            //    var smth = JObject.Parse(sdata);
+            //    ID = smth["Id"].Value<string>();
+            //    link = smth["Url"].Value<string>();
+            //}
+
+            //try
+            //{
+            //    var data = JsonConvert.SerializeObject(new
+            //    {
+            //        UserFileId = ID
+            //    });
+            //    var content = new StringContent(data, Encoding.UTF8, "application/json");
+            //    var result = await someClient.PostAsync(SiteUrl + "api/Account/UpdateUserPic", content);
+            //}
+            //catch (Exception e)
+            //{}
+        }
 
         public static async Task<string> GetEvents()
         {
             var client = new HttpClient();
-            var result = await client.GetStringAsync(SiteUrl + GetEventsUrl);
+            var JsnString = await client.GetStringAsync(SiteUrl + GetEventsUrl + "?count=100");
+
+            return JsnString;
+        }
+
+        public static async Task<string> GetComments(int EventId)
+        {
+            var client = new HttpClient();
+            var JsnString = await client.GetStringAsync(SiteUrl + AddCommentUrl + "/" + EventId.ToString());
+
+            return JsnString;
+        }
+
+        public static async Task<string> GetFriends()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
+            var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
             return result;
         }
+        public static async void AddComment(string text) // not tested
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
+            try
+            {
+                var data = JsonConvert.SerializeObject(new
+                {
+                    CommentId = 0,
+                    UserId = CurrentUser.id,
+                    Text = text,
+                    DateTime = DateTime.Now
+                });
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var result = await client.PostAsync(SiteUrl + AddCommentUrl, content);
+            }
+            catch (Exception e)
+            { }
 
         public static async Task<string> GetFriends()
         {
@@ -192,10 +233,7 @@ namespace Common
                 var result = await client.PostAsync(SiteUrl + SubscribeUrl + '/', content);
             }
             catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            { }
         }
-        
     }
 }

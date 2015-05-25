@@ -1,0 +1,26 @@
+{
+  "Items": [
+    {
+        "Title": "Daily menu special",
+        "Description": "Price: $10",
+        "Image": "/Assets/DataImages/Content.jpg",
+        "_id": "a69b125e-345b-4ddc-a278-bfbb46bb94eb"
+    },
+    {
+      "Title": "Kids menu","Description": "Price: $5",
+      "Image": "/Assets/DataImages/Content-1.jpg",
+      "_id": "fc058cac-cc7b-409f-a710-c9fc1bcb0b0d"
+    },
+    {
+      "Title": "Menu for two","Description": "Price: $18",
+      "Image": "/Assets/DataImages/Content-2.jpg",
+      "_id": "8d7baed5-d3dc-4e36-b24e-f132cbe8d1fe"
+    },
+    {
+      "Title": "Menu for four",
+      "Description": "Price: $35",
+      "Image": "/Assets/DataImages/Content-3.jpg",
+      "_id": "4ca5bdc4-cb71-49eb-b2b4-28fc6d92fa7e"
+    }
+  ]
+}
