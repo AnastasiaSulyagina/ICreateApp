@@ -162,33 +162,6 @@ namespace Common
 
             return JsnString;
         }
-
-        public static async Task<string> GetFriends()
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
-            var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
-            return result;
-        }
-        public static async void AddComment(string text) // not tested
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
-            try
-            {
-                var data = JsonConvert.SerializeObject(new
-                {
-                    CommentId = 0,
-                    UserId = CurrentUser.id,
-                    Text = text,
-                    DateTime = DateTime.Now
-                });
-                var content = new StringContent(data, Encoding.UTF8, "application/json");
-                var result = await client.PostAsync(SiteUrl + AddCommentUrl, content);
-            }
-            catch (Exception e)
-            { }
-
         public static async Task<string> GetFriends()
         {
             var client = new HttpClient();
@@ -213,7 +186,7 @@ namespace Common
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                //Console.WriteLine(e.ToString());
             }
 
         }
