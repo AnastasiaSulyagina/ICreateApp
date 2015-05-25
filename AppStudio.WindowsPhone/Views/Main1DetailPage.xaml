@@ -30,16 +30,9 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
-            <AppBarButton x:Uid="TextToSpeechButton" Icon="Volume" DataContext="{Binding Main1Model}" Command="{Binding TextToSpeechCommand}" Visibility="{Binding TextToSpeechVisibility}"/>
-            <AppBarButton x:Uid="RefreshButton" Icon="Refresh" DataContext="{Binding Main1Model}" Command="{Binding RefreshCommand}" Visibility="{Binding RefreshVisibility}"/>
-            <AppBarButton x:Uid="GoToSourceButton" Icon="Globe" DataContext="{Binding Main1Model}" Command="{Binding GoToSourceCommand}" Visibility="{Binding GoToSourceVisibility}"/>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="ShareItemButton" DataContext="{Binding Main1Model}" Command="{Binding ShareItemCommand}" Visibility="{Binding ShareItemVisibility}"/>
-                <AppBarButton x:Uid="SmallTextButton" DataContext="{Binding Main1Model}" Command="{Binding ChangeFontSizeCommand}" CommandParameter="Small"/>
-                <AppBarButton x:Uid="NormalTextButton" DataContext="{Binding Main1Model}" Command="{Binding ChangeFontSizeCommand}" CommandParameter="Normal"/>
-                <AppBarButton x:Uid="BigTextButton" DataContext="{Binding Main1Model}" Command="{Binding ChangeFontSizeCommand}" CommandParameter="Big"/>
-            </CommandBar.SecondaryCommands>
+        <CommandBar  Opacity="0.8"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
+            <AppBarButton x:Uid="FollowButton" Icon="Add" DataContext="{Binding MainViewModel}"  Visibility="{Binding RefreshVisibility}" Label="добавить в друзья" Click="AppBarButton_Click"/>
+            <AppBarButton x:Uid="WriteMessageButton" Icon="MailFilled" DataContext="{Binding MainViewModel}" Visibility="{Binding RefreshVisibility}" Label="сообщение" Click="AppBarButton_Click_1"/>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

@@ -41,7 +41,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions> 
                         <Image x:Name="userPic" HorizontalAlignment="Left" Grid.Column="0" Height="150" VerticalAlignment="Top" Width="150"/>
                         <TextBlock x:Name="userName" Style="{StaticResource SubtitleStyle}" Margin="0, 10, 10, 10" TextWrapping="Wrap" Grid.Column="1" Text="" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
@@ -54,7 +54,7 @@
             </StackPanel>
 
         </Grid>
-
+        
     </Grid>
     <Page.BottomAppBar>
         <CommandBar  Opacity="0.8"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">

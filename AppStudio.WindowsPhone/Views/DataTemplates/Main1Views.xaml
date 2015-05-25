@@ -44,7 +44,60 @@
 
     <DataTemplate x:Key="MainDetailDetail">
         <ScrollViewer ZoomMode="Disabled">
-            <StackPanel Margin="12,0">
+            <Grid Background="{StaticResource AppBackground}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
+                    <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
+                </Border>
+
+                <TextBlock Margin="12,0" Grid.Row="1"  Text="профиль" Style="{StaticResource PageTitleStyle}" />
+
+                <Grid Grid.Row="2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Margin="10,0"  VerticalAlignment="Stretch"
+                        HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Margin="0,0,0,0" Style="{StaticResource ImageButtonStyle}" 
+                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
+                                    <Viewbox MaxWidth="150" MaxHeight="150">
+                                        <Image Source="{Binding Image}"/>
+                                    </Viewbox>
+                                </Button>
+                                <!--<Image x:Name="userPic" HorizontalAlignment="Left" Grid.Column="0" Height="150" VerticalAlignment="Top" Width="150"/>-->
+                                <TextBlock x:Name="userName" Style="{StaticResource PageTitleStyle}" Margin="20, 10, 10, 10" Text="{Binding Title}" TextWrapping="Wrap" Grid.Column="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <StackPanel HorizontalAlignment="Stretch" Background="{StaticResource AppBarForeground}" Height="50" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="Top">
+                        <TextBlock Text="События" Margin="10, 10, 10, 10" Foreground="{StaticResource AppBackground}" FontSize="24" FontFamily="Segoe WP Light"/>
+                    </StackPanel>
+                    
+                    <ListView>
+                        
+                    </ListView>
+
+                </Grid>
+
+            </Grid>
+            <!--<StackPanel Margin="12,0">
                 <TextBlock Margin="0,16" Text="{Binding Title}" Style="{StaticResource PageTitleStyle}"/>
                 <TextBlock Style="{StaticResource TitleStyle}" Text="{Binding Subtitle}" LineStackingStrategy="MaxHeight"/>
                 <Button Margin="0,16,0,0" Style="{StaticResource ImageButtonStyle}" 
@@ -55,7 +108,7 @@
                 </Button>
                 <RichTextBlock Margin="0,12" html2xaml:Properties.Html="{Binding Description}" html2xaml:Properties.ContainsCrlf="True"
                                Style="{Binding DataContext.DisplayFontSize, ElementName=Flip, Converter={StaticResource RichDescriptionStyleConverter}}"/>
-            </StackPanel>
+            </StackPanel>-->
         </ScrollViewer>
     </DataTemplate>
 </ResourceDictionary>

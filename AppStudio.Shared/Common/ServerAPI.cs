@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using System.IO;
 
 namespace Common
 {
@@ -188,8 +189,35 @@ namespace Common
             catch (Exception e)
             { }
 
+        public static async Task<string> GetFriends()
+        {
+            var client = new HttpClient();
+            var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
+            return result;
         }
-        public static async void Follow(string name) // not tested
+
+        public static async void AddComment(string text) 
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
+            try
+            {
+                var data = JsonConvert.SerializeObject(new
+                {
+                    UserId = CurrentUser.id,
+                    Text = text,
+                    DateTime = DateTime.Now
+                });
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var result = await client.PostAsync(SiteUrl + AddCommentUrl, content);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+        }
+        public static async void Follow(string name)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
@@ -207,6 +235,5 @@ namespace Common
             catch (Exception e)
             { }
         }
-
     }
 }
