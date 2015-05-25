@@ -18,8 +18,6 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Storage.Streams;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace AppStudio.Views
 {
     /// <summary>
@@ -38,18 +36,11 @@ namespace AppStudio.Views
             set { eEvents = value; }
         }
 
-        //public Decimal isMapVisible;
         public AddEventPage()
         {
             this.InitializeComponent();
 
-            geoposition.Altitude = 0.0;
-            geoposition.Latitude = 59.880147;
-            geoposition.Longitude = 29.828944;
-
             EventDateTime = DateTime.Now;
-
-            //isMapVisible = new Decimal(1);
         }
 
         /// <summary>
@@ -68,7 +59,6 @@ namespace AppStudio.Views
             geoposition = e.Location.Position;
             eEvents.Clear();
             eEvents.Add((new Common.Event(1, "", new User(""), new DateTime(2008, 1, 1, 1, 1, 1), new DateTime(2008, 1, 1, 1, 1, 1), geoposition.Latitude, geoposition.Longitude, "")));
-            //MapControl.SetLocation(PushPin, eventGeopoint);
         }
         
         private void showMap_Click(object sender, RoutedEventArgs e)
@@ -79,7 +69,6 @@ namespace AppStudio.Views
         private void HideError_Click(object sender, RoutedEventArgs e)
         {
             CreateButton.Flyout.Hide();
-
         }
         
 
@@ -108,14 +97,11 @@ namespace AppStudio.Views
             {
                 NavigationServices.NavigateToPage("LoginPage");
             }
-            else 
+            else if (DescriptionBox.Text != "")
             {
-                if (DescriptionBox.Text != "")
-                {
-                    ErrorText.Text = "Событие создано";
-                    ServerAPI.AddEvent(DescriptionBox.Text, geoposition, EventDateTime);
-                    NavigationServices.NavigateToPage("MainPage");
-                }
+                ErrorText.Text = "Событие создано";
+                ServerAPI.AddEvent(DescriptionBox.Text, geoposition, EventDateTime);
+                NavigationServices.NavigateToPage("MainPage");
             }
         }
     }

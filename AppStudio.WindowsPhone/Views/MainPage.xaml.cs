@@ -34,7 +34,6 @@ namespace AppStudio.Views
 {
     public sealed partial class MainPage : Page
     {
-        public string EventString { get; set; }
         private MainViewModel _mainViewModel = null;
 
         private NavigationHelper _navigationHelper;
@@ -47,22 +46,10 @@ namespace AppStudio.Views
             get { return eEvents; }
             set { eEvents = value; }
         }
-        public class position
-        {
-            public Geopoint MapCenter
-            {
-                get { return mapCenter; }
-                set { mapCenter = value; }
-            }
-
-            private Geopoint mapCenter;
-        }
-        public position geo = new position();
+        
         private BasicGeoposition currentGeo = new BasicGeoposition();
 
         private Geolocator geolocator = new Geolocator();
-            
-
 
         public MainPage()
         {
@@ -79,40 +66,12 @@ namespace AppStudio.Views
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
         }
-
-        /*private DependencyObject FindChildControl<T>(DependencyObject control, string ctrlName)
-        {
-            int childNumber = VisualTreeHelper.GetChildrenCount(control);
-            for (int i = 0; i < childNumber; i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(control, i);
-                FrameworkElement fe = child as FrameworkElement;
-                // Not a framework element or is null
-                if (fe == null) return null;
-
-                if (child is T && fe.Name == ctrlName)
-                {
-                    // Found the control so return
-                    return child;
-                }
-                else
-                {
-                    // Not found it - search children
-                    DependencyObject nextLevel = FindChildControl<T>(child, ctrlName);
-                    if (nextLevel != null)
-                        return nextLevel;
-                }
-            }
-            return null;
-        }
-        */
-        
+                
         private async void update()
         {
             
             geolocator.DesiredAccuracyInMeters = 50;
             var cts = new CancellationTokenSource();
-            //this.updateProgressBar.IsIndeterminate = true;
             var lastString = "";
             do
             {
@@ -120,16 +79,6 @@ namespace AppStudio.Views
                 try
                 {
                     JsnString = await Common.ServerAPI.GetEvents();
-                    /*Geoposition geoposition = await geolocator.GetGeopositionAsync(
-                        maximumAge: TimeSpan.FromMinutes(1),
-                        timeout: TimeSpan.FromSeconds(10)
-                    );
-                    currentGeo.Latitude = geoposition.Coordinate.Latitude;
-                    currentGeo.Longitude = geoposition.Coordinate.Longitude;
-
-                    geo.MapCenter = new Geopoint(currentGeo);
-                    (this.MapSection.FindName("myMapControl") as MapControl).Center = MapCenter;*/
-                    
                 }
                 catch
                 {
@@ -143,12 +92,13 @@ namespace AppStudio.Views
                     eEvents.Clear();
                     foreach(var elem in deser)
                     {
-                        eEvents.Add(new Common.Event(elem.EventId, elem.LocationCaption, new Common.User(elem.User.UserName, elem.User.UserId, elem.User.Photo), elem.EventDate, elem.DateCreate, elem.Latitude, elem.Longitude, elem.Description));
+                        eEvents.Add(new Common.Event(elem.EventId, elem.LocationCaption,
+                            new Common.User(elem.User.UserName, elem.User.UserId, elem.User.Photo),
+                                elem.EventDate, elem.DateCreate, elem.Latitude, elem.Longitude, elem.Description));
                     }
                 }
                 await loop(cts.Token);
                 
-                //this.updateProgressBar.IsIndeterminate = false;
                 cts.Cancel();
                 lastString = JsnString;
             } while (true);
@@ -156,8 +106,6 @@ namespace AppStudio.Views
 
         private async Task<int> loop(CancellationToken ct)
         {
-
-
             await Task.Delay(1000);
             return 1;
         }
@@ -178,19 +126,12 @@ namespace AppStudio.Views
                 MainViewModel.SelectedItem = selectedSection.DataContext as ViewModelBase;
             }
         }
-
-        /// <summary>
-        /// Вызывается перед отображением этой страницы во фрейме.
-        /// </summary>
-        /// <param name="e">Данные события, описывающие, каким образом была достигнута эта страница.
-        /// Этот параметр обычно используется для настройки страницы.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             _dataTransferManager = DataTransferManager.GetForCurrentView();
             _dataTransferManager.DataRequested += OnDataRequested;
             _navigationHelper.OnNavigatedTo(e);
             await MainViewModel.LoadDataAsync();
-            
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -216,41 +157,6 @@ namespace AppStudio.Views
             var index = eEvents.IndexOf(elem);
             eEvents.Remove(elem);
             eEvents.Insert(index, elem);
-            
-            /*
-            ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(map);
-
-            foreach (DependencyObject obj in children)
-            {
-                Pushpin pin;
-                try
-                {
-                    pin = (Pushpin)obj;
-                }
-                catch (Exception eeee)
-                {
-                    continue;
-                }
-                if (pin.Content == null)
-                {
-                    pin.Content = "";
-                }
-                if (pin != null)
-                {
-                    string s = pin.Content as String;
-                    if (s != "")
-                    {
-                        pin.Content = "";
-                    }
-                }
-            }
-            //((Pushpin)sender).Content = (((Pushpin)sender).Tag as Event).description;
-            ((Pushpin)sender).Content = (((Pushpin)sender).Tag as Event).MySquareDescriprion;
-
-            tapFlag = true;
-            //pin.Content = (pin.Tag as Event).description;
-            // MessageBox.Show((pin.Tag as Event).description);
-          */
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -279,6 +185,5 @@ namespace AppStudio.Views
         {
             NavigationServices.NavigateToPage("EventPage", e.ClickedItem);
         }
-        
     }
 }

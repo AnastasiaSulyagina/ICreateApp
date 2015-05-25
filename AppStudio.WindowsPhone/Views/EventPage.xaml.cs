@@ -23,13 +23,8 @@ using Newtonsoft.Json;
 using AppStudio;
 using Common;
 
-// Документацию по шаблону элемента пустой страницы см. по адресу http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace AppStudio.Views
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class EventPage : Page
     {
         private ObservableCollection<Comment> eComments = new ObservableCollection<Comment>();
@@ -45,11 +40,9 @@ namespace AppStudio.Views
             this.InitializeComponent();
             
         }
-
         private async void update()
         {
             var cts = new CancellationTokenSource();
-            //this.updateProgressBar.IsIndeterminate = true;
             var lastString = "";
             do
             {
@@ -76,8 +69,6 @@ namespace AppStudio.Views
                     }
                 }
                 await loop(cts.Token);
-
-                //this.updateProgressBar.IsIndeterminate = false;
                 cts.Cancel();
                 lastString = JsnString;
             } while (true);
@@ -85,18 +76,10 @@ namespace AppStudio.Views
 
         private async Task<int> loop(CancellationToken ct)
         {
-
-
             await Task.Delay(1000);
             return 1;
         }
 
-
-        /// <summary>
-        /// Вызывается перед отображением этой страницы во фрейме.
-        /// </summary>
-        /// <param name="e">Данные события, описывающие, каким образом была достигнута эта страница.
-        /// Этот параметр обычно используется для настройки страницы.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Object obj = e.Parameter;
@@ -106,7 +89,6 @@ namespace AppStudio.Views
             DescriptionBlock.Text = Event.ShortDescription;
             LocationCaptionBlock.Text = Event.ShortLocationCaption;
             EventDateBlock.Text = Event.EventDate.ToString();
-
 
             update();
         }
