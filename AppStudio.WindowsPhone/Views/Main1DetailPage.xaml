@@ -8,9 +8,7 @@
     xmlns:vm="using:AppStudio.ViewModels"
     mc:Ignorable="d">
 
-    <Grid Background="{StaticResource AppBackground}"
-          DataContext="{Binding Main1Model}"
-          d:DataContext="{d:DesignData Source=/Assets/Data/MainDataSource.json, Type=vm:Main1ViewModel, IsDesignTimeCreatable=true}">
+    <Grid Background="{StaticResource AppBackground}">
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -18,21 +16,66 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <ScrollViewer ZoomMode="Disabled">
+            <Grid Background="{StaticResource AppBackground}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <FlipView x:Name="Flip" Grid.Row="0" AutomationProperties.AutomationId="ItemsFlipView" AutomationProperties.Name="Item Details" TabIndex="1"
-                  ItemsSource="{Binding Items}"
-                  ItemTemplate="{StaticResource MainDetailDetail}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
+                <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
+                    <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
+                </Border>
 
+                <TextBlock Margin="12,0" Grid.Row="1"  Text="profile" Style="{StaticResource PageTitleStyle}" />
+
+                <Grid Grid.Row="2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Margin="10,0"  VerticalAlignment="Stretch"
+                        HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Margin="0,0,0,0" Style="{StaticResource ImageButtonStyle}" 
+                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding MyUser.Photo}">
+                                    <Viewbox MaxWidth="150" MaxHeight="150">
+                                        <Image Source="{Binding MyUser.Photo}"/>
+                                    </Viewbox>
+                                </Button>
+                                <TextBlock x:Name="userName" Style="{StaticResource PageTitleStyle}" Margin="20, 10, 10, 10" Text="{Binding MyUser.UserName}" TextWrapping="Wrap" Grid.Column="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <StackPanel HorizontalAlignment="Stretch" Background="{StaticResource AppBarForeground}" Height="50" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="Top">
+                        <TextBlock Text="Events" Margin="10, 10, 10, 10" Foreground="{StaticResource AppBackground}" FontSize="24" FontFamily="Segoe WP Light"/>
+                    </StackPanel>
+
+                    <ListView>
+
+                    </ListView>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
+        <TextBlock x:Name="nameBlock" Text="{Binding SelectedItem.Title}"></TextBlock>
     </Grid>
 
     <Page.BottomAppBar>
         <CommandBar  Opacity="0.8"  Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
             <AppBarButton x:Uid="FollowButton" Icon="Add" DataContext="{Binding MainViewModel}"  Visibility="{Binding RefreshVisibility}" Label="добавить в друзья" Click="AppBarButton_Click"/>
-            <AppBarButton x:Uid="WriteMessageButton" Icon="MailFilled" DataContext="{Binding MainViewModel}" Visibility="{Binding RefreshVisibility}" Label="сообщение" Click="AppBarButton_Click_1"/>
+            <AppBarButton x:Uid="WriteMessageButton" Icon="MailFilled" DataContext="{Binding MainViewModel}" Visibility="{Binding RefreshVisibility}" Label="сообщение"/>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

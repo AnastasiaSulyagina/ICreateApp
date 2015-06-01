@@ -69,13 +69,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\nastya.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\phil.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\search.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\unknown.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\User.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\ErrorImage.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Assets\map_bottom.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\map_marker.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\user.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\FlipSquareTile.png">

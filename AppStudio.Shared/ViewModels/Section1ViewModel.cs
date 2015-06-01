@@ -15,8 +15,11 @@ namespace AppStudio.ViewModels
 {
     public class Section1ViewModel : ViewModelBase<MenuSchema>
     {
-        public static string UserName {get; set;}
-        public static string PictureUrl {get; set;}
+
+        public string UserName { get { return CurrentUser.UserName; } set { CurrentUser.UserName = value; } }
+
+        public string PictureUrl { get { return CurrentUser.PictureUrl; } set { CurrentUser.PictureUrl = value; } }
+
         private RelayCommandEx<MenuSchema> itemClickCommand;
         public RelayCommandEx<MenuSchema> ItemClickCommand
         {

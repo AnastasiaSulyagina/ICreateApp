@@ -18,11 +18,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border x:Name="HeaderHost" Height="75" Background="{Binding Source={StaticResource AppBarForeground}}" VerticalAlignment="Top">
-            <ContentPresenter ContentTemplate="{StaticResource PageHeaderNew}" />
+        <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
+            <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
         </Border>
 
-        <TextBlock Margin="12,0" Grid.Row="1"  Text="вход" Style="{StaticResource PageTitleStyle}" />
+        <TextBlock x:Uid="AboutSection" Margin="12,0" Grid.Row="1"  Text="вход" Style="{StaticResource PageTitleStyle}" />
 
         <Grid Grid.Row="2" 
             d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
@@ -36,7 +36,7 @@
             <ScrollViewer Grid.Row="0" Margin="10,0" Height="642" VerticalAlignment="Top"
                         HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <TextBox x:Name="LoginBox" Margin="10, 30, 10, 10"  Height="40" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Логин" BorderThickness="2.5" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Foreground="{Binding Source={StaticResource TitleForeground}}" LostFocus="LoginBox_LostFocus"/>
+                    <TextBox x:Name="LoginBox" Margin="10, 30, 10, 10"  Height="40" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="qweqwe" BorderThickness="2.5" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Foreground="{Binding Source={StaticResource TitleForeground}}" LostFocus="LoginBox_LostFocus"/>
                     <PasswordBox x:Name="PasswordBox" Height="40" Margin="10, 10, 10, 10" HorizontalAlignment="Stretch" BorderThickness="2.5" BorderBrush="{Binding Source={StaticResource DarkGreyForeground}}" Foreground="{Binding Source={StaticResource TitleForeground}}" Password="123123"/>
 
             <Button x:Name="LoginButton" Content="войти" Margin="0,0,10,0" Height="85" Width="230" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="0" BorderBrush="{Binding Source={StaticResource AppBarForeground}}" Foreground="White" Background="{Binding Source={StaticResource AppBarForeground}}" Grid.RowSpan="4" Click="LoginButton_Click"/>

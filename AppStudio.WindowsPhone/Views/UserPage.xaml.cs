@@ -23,7 +23,6 @@ namespace AppStudio.Views
     /// </summary>
     public sealed partial class UserPage : Page
     {
-        public User currentUser;
         public UserPage()
         {
             this.InitializeComponent();
@@ -41,7 +40,6 @@ namespace AppStudio.Views
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            ServerAPI.Follow(userName.Text);
         }
 
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)

@@ -8,7 +8,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using System.IO;
 
 namespace Common
 {
@@ -21,8 +20,8 @@ namespace Common
         private static string GetEventsUrl = "api/Events";
         private static string AddEventUrl = "api/Events";
         private static string AddCommentUrl = "api/eventComments";
-        private static string SubscribeUrl = "api/Friends/Follow";
-        private static string GetFriendsUrl = "api/Friends/my/m";
+        private static string SubscribeUrl = "api/friends/Follow";
+        private static string GetFriendsUrl = "api/Friends/List/my/m";
         private static string SiteUrl = "http://icreate.azurewebsites.net/";
 
 
@@ -150,26 +149,19 @@ namespace Common
         public static async Task<string> GetEvents()
         {
             var client = new HttpClient();
-            var JsnString = await client.GetStringAsync(SiteUrl + GetEventsUrl + "?count=100");
-
-            return JsnString;
+            var result = await client.GetStringAsync(SiteUrl + GetEventsUrl);
+            return result;
         }
 
-        public static async Task<string> GetComments(int EventId)
-        {
-            var client = new HttpClient();
-            var JsnString = await client.GetStringAsync(SiteUrl + AddCommentUrl + "/" + EventId.ToString());
-
-            return JsnString;
-        }
         public static async Task<string> GetFriends()
         {
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
             var result = await client.GetStringAsync(SiteUrl + GetFriendsUrl);
             return result;
         }
 
-        public static async void AddComment(string text) 
+        public static async void AddComment(string text) // not tested
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
@@ -177,6 +169,7 @@ namespace Common
             {
                 var data = JsonConvert.SerializeObject(new
                 {
+                    CommentId = 0,
                     UserId = CurrentUser.id,
                     Text = text,
                     DateTime = DateTime.Now
@@ -185,12 +178,10 @@ namespace Common
                 var result = await client.PostAsync(SiteUrl + AddCommentUrl, content);
             }
             catch (Exception e)
-            {
-                //Console.WriteLine(e.ToString());
-            }
+            { }
 
         }
-        public static async void Follow(string name)
+        public static async void Follow(string name) 
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + CurrentUser.token);
@@ -208,5 +199,7 @@ namespace Common
             catch (Exception e)
             { }
         }
+        
+
     }
 }

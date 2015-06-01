@@ -3,61 +3,54 @@ using System.Net.NetworkInformation;
 
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 using AppStudio.Services;
 using AppStudio.ViewModels;
-using System.Collections.Generic;
-using Common;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
 
 namespace AppStudio.Views
 {
-    public sealed partial class Main1Page : Page
+    public sealed partial class Section2Detail : Page
     {
         private NavigationHelper _navigationHelper;
-        //private List<User> Friends;
+
         private DataTransferManager _dataTransferManager;
-        public ObservableCollection<Common.User> MyFriends
-        {
-            get { return CurrentUser.myf; }
-        }
-        public Main1Page()
+
+        public Section2Detail()
         {
             this.InitializeComponent();
             _navigationHelper = new NavigationHelper(this);
 
-            Main1Model = new Main1ViewModel();
-            DataContext = this;
+            Section2Model = new Section2ViewModel();
 
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
         }
 
-        private async void update()
-        {
-
-            //string result = await CurrentUser.GetFriends();
-            //Friends = JsonConvert.DeserializeObject<List<User>>(result);
-            //eventList.ItemsSource = Friends;
-        }
-
-        public Main1ViewModel Main1Model { get; private set; }
+        public Section2ViewModel Section2Model { get; private set; }
 
         public NavigationHelper NavigationHelper
         {
             get { return _navigationHelper; }
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             _dataTransferManager = DataTransferManager.GetForCurrentView();
             _dataTransferManager.DataRequested += OnDataRequested;
 
             _navigationHelper.OnNavigatedTo(e);
-            await Main1Model.LoadItemsAsync();
+
+            await Section2Model.LoadItemsAsync();
+            Section2Model.SelectItem(e.Parameter);
+
+            if (Section2Model != null)
+            {
+                Section2Model.ViewType = ViewTypes.Detail;
+            }
+            DataContext = this;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -68,15 +61,10 @@ namespace AppStudio.Views
 
         private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
-            if (Main1Model != null)
+            if (Section2Model != null)
             {
-                Main1Model.GetShareContent(args.Request);
+                Section2Model.GetShareContent(args.Request);
             }
         }
-        private void _ItemClick(object sender, ItemClickEventArgs e)
-        {
-            NavigationServices.NavigateToPage("Main1Detail", e.ClickedItem);
-        }
-
     }
 }

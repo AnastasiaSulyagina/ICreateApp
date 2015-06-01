@@ -10,7 +10,8 @@ namespace AppStudio.Views
     public sealed partial class Main1Detail : Page
     {
         private NavigationHelper _navigationHelper;
-
+        public User MyUser { get { return user; } }
+        public User user;
         private DataTransferManager _dataTransferManager;
 
         public Main1Detail()
@@ -30,9 +31,9 @@ namespace AppStudio.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            user = (User)e.Parameter;
             _dataTransferManager = DataTransferManager.GetForCurrentView();
             _dataTransferManager.DataRequested += OnDataRequested;
-
             _navigationHelper.OnNavigatedTo(e);
 
             if (Main1Model != null)
@@ -59,14 +60,9 @@ namespace AppStudio.Views
             }
         }
 
-        private void AppBarButton_Click_1(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            
-        }
-
         private void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-
+            ServerAPI.Follow(nameBlock.Text);
         }
     }
 }
