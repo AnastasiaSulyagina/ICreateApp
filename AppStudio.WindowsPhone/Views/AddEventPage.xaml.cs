@@ -1,7 +1,7 @@
 ﻿using AppStudio.Services;
 using Common;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -18,6 +18,8 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Storage.Streams;
 
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+
 namespace AppStudio.Views
 {
     /// <summary>
@@ -25,22 +27,14 @@ namespace AppStudio.Views
     /// </summary>
     public sealed partial class AddEventPage : Page
     {
-        private DateTime EventDateTime = new DateTime();
+        private DateTime EventDateTime;
         private BasicGeoposition geoposition = new BasicGeoposition();
         public Geopoint eventGeopoint;
-
-        private ObservableCollection<Common.Event> eEvents = new ObservableCollection<Common.Event>();
-        public ObservableCollection<Common.Event> Events
-        {
-            get { return eEvents; }
-            set { eEvents = value; }
-        }
-
+        //public Decimal isMapVisible;
         public AddEventPage()
         {
             this.InitializeComponent();
-
-            EventDateTime = DateTime.Now;
+            //isMapVisible = new Decimal(1);
         }
 
         /// <summary>
@@ -57,8 +51,7 @@ namespace AppStudio.Views
         {
             eventGeopoint = new Geopoint(e.Location.Position);
             geoposition = e.Location.Position;
-            eEvents.Clear();
-            eEvents.Add((new Common.Event(1, "", new User(""), new DateTime(2008, 1, 1, 1, 1, 1), new DateTime(2008, 1, 1, 1, 1, 1), geoposition.Latitude, geoposition.Longitude, "")));
+            //MapControl.SetLocation(PushPin, eventGeopoint);
         }
         
         private void showMap_Click(object sender, RoutedEventArgs e)
@@ -66,11 +59,6 @@ namespace AppStudio.Views
             mapShow();
 
         }
-        private void HideError_Click(object sender, RoutedEventArgs e)
-        {
-            CreateButton.Flyout.Hide();
-        }
-        
 
         public void mapShow()
         {
@@ -97,11 +85,9 @@ namespace AppStudio.Views
             {
                 NavigationServices.NavigateToPage("LoginPage");
             }
-            else if (DescriptionBox.Text != "")
+            else 
             {
-                ErrorText.Text = "Событие создано";
                 ServerAPI.AddEvent(DescriptionBox.Text, geoposition, EventDateTime);
-                NavigationServices.NavigateToPage("MainPage");
             }
         }
     }

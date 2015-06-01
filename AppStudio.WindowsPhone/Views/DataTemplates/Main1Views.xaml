@@ -1,4 +1,4 @@
-<ResourceDictionary
+ï»¿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:AppStudio.Controls"
@@ -8,7 +8,7 @@
     <!-- ListHorizontalCards -->
     <DataTemplate x:Key="Main1List">
         <Grid>
-            <ListView ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True" 
+            <ListView ItemsSource="{Binding MyFriends}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True" 
                       commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                      ItemTemplate="{StaticResource Main1Item}">
@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="{Binding Image}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Image Source="{Binding Photo}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Grid Grid.Column="1">
                 <Rectangle Width="900" Height="0"/>
                 <Grid Margin="16,5,16,5">
@@ -32,8 +32,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="1" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2"/>
-                    <!--<TextBlock Grid.Row="1" Margin="0,5,0,0" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding Subtitle}"/>-->
+                    <TextBlock Grid.Row="1" Style="{StaticResource BoxTitleStyle}" Text="{Binding UserName}" MaxLines="2"/>
+                     
                 </Grid>
             </Grid>            
         </Grid>
@@ -50,13 +50,13 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
+                
                 <Border x:Name="HeaderHost" Grid.Row="0" Background="{Binding Source={StaticResource AppBarForeground}}">
                     <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
                 </Border>
-
-                <TextBlock Margin="12,0" Grid.Row="1"  Text="ïðîôèëü" Style="{StaticResource PageTitleStyle}" />
-
+                
+                <TextBlock Margin="12,0" Grid.Row="1"  Text="Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ" Style="{StaticResource PageTitleStyle}" />
+                
                 <Grid Grid.Row="2" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="160"/>
@@ -74,41 +74,26 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Button Margin="0,0,0,0" Style="{StaticResource ImageButtonStyle}" 
-                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
+                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Photo}">
                                     <Viewbox MaxWidth="150" MaxHeight="150">
-                                        <Image Source="{Binding Image}"/>
+                                        <Image Source="{Binding Photo}"/>
                                     </Viewbox>
                                 </Button>
-                                <!--<Image x:Name="userPic" HorizontalAlignment="Left" Grid.Column="0" Height="150" VerticalAlignment="Top" Width="150"/>-->
-                                <TextBlock x:Name="userName" Style="{StaticResource PageTitleStyle}" Margin="20, 10, 10, 10" Text="{Binding Title}" TextWrapping="Wrap" Grid.Column="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="userName" Style="{StaticResource PageTitleStyle}" Margin="20, 10, 10, 10" Text="{Binding UserName}" TextWrapping="Wrap" Grid.Column="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
 
                             </Grid>
                         </StackPanel>
                     </ScrollViewer>
                     <StackPanel HorizontalAlignment="Stretch" Background="{StaticResource AppBarForeground}" Height="50" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="Top">
-                        <TextBlock Text="Ñîáûòèÿ" Margin="10, 10, 10, 10" Foreground="{StaticResource AppBackground}" FontSize="24" FontFamily="Segoe WP Light"/>
+                        <TextBlock Text="Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ñ" Margin="10, 10, 10, 10" Foreground="{StaticResource AppBackground}" FontSize="24" FontFamily="Segoe WP Light"/>
                     </StackPanel>
-                    
+
                     <ListView>
-                        
+
                     </ListView>
-
                 </Grid>
-
             </Grid>
-            <!--<StackPanel Margin="12,0">
-                <TextBlock Margin="0,16" Text="{Binding Title}" Style="{StaticResource PageTitleStyle}"/>
-                <TextBlock Style="{StaticResource TitleStyle}" Text="{Binding Subtitle}" LineStackingStrategy="MaxHeight"/>
-                <Button Margin="0,16,0,0" Style="{StaticResource ImageButtonStyle}" 
-                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
-                    <Viewbox MaxWidth="400" MaxHeight="300">
-                        <Image Source="{Binding Image}"/>
-                    </Viewbox>
-                </Button>
-                <RichTextBlock Margin="0,12" html2xaml:Properties.Html="{Binding Description}" html2xaml:Properties.ContainsCrlf="True"
-                               Style="{Binding DataContext.DisplayFontSize, ElementName=Flip, Converter={StaticResource RichDescriptionStyleConverter}}"/>
-            </StackPanel>-->
         </ScrollViewer>
     </DataTemplate>
 </ResourceDictionary>

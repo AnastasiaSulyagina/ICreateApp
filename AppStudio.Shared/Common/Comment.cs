@@ -15,7 +15,6 @@ namespace Common
 
         public Comment(int commentId, int userId, string text, DateTime dateCreate)
         {
-            User = new User();
             CommentId = commentId;
             User.UserId = userId;
             Text = text;

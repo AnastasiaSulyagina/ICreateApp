@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -34,6 +33,7 @@ namespace AppStudio.Views
 {
     public sealed partial class MainPage : Page
     {
+        public string EventString { get; set; }
         private MainViewModel _mainViewModel = null;
 
         private NavigationHelper _navigationHelper;
@@ -46,16 +46,20 @@ namespace AppStudio.Views
             get { return eEvents; }
             set { eEvents = value; }
         }
-        
+
+
+        public Geopoint MapCenter;
         private BasicGeoposition currentGeo = new BasicGeoposition();
 
         private Geolocator geolocator = new Geolocator();
+        
 
         public MainPage()
         {
-            CurrentUser.PictureUrl = "ms-appx:///Assets/user.jpg";
-            Section1ViewModel.UserName = CurrentUser.UserName;
-            Section1ViewModel.PictureUrl = CurrentUser.PictureUrl;
+            CurrentUser.PictureUrl = "ms-appx:///Assets/DataImages/nastya.jpg";
+            CurrentUser.UserName = "anastasia";
+            //Section1ViewModel.PictureUrl = CurrentUser.PictureUrl;
+
             this.InitializeComponent();
             update();
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -65,13 +69,17 @@ namespace AppStudio.Views
 
             ApplicationView.GetForCurrentView().
                 SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
+
+
         }
-                
+        
+
         private async void update()
         {
             
             geolocator.DesiredAccuracyInMeters = 50;
             var cts = new CancellationTokenSource();
+            //this.updateProgressBar.IsIndeterminate = true;
             var lastString = "";
             do
             {
@@ -79,6 +87,17 @@ namespace AppStudio.Views
                 try
                 {
                     JsnString = await Common.ServerAPI.GetEvents();
+                    /*Geoposition geoposition = await geolocator.GetGeopositionAsync(
+                        maximumAge: TimeSpan.FromMinutes(1),
+                        timeout: TimeSpan.FromSeconds(10)
+                    );
+                    currentGeo.Latitude = geoposition.Coordinate.Latitude;
+                    currentGeo.Longitude = geoposition.Coordinate.Longitude;
+                    
+                    string s = (this.MapSection.FindName("myMapControl") as MapControl).MapServiceToken;
+                    MapCenter = new Geopoint(currentGeo);
+                    (this.MapSection.FindName("myMapControl") as MapControl).Center = MapCenter;*/
+                    
                 }
                 catch
                 {
@@ -92,13 +111,12 @@ namespace AppStudio.Views
                     eEvents.Clear();
                     foreach(var elem in deser)
                     {
-                        eEvents.Add(new Common.Event(elem.EventId, elem.LocationCaption,
-                            new Common.User(elem.User.UserName, elem.User.UserId, elem.User.Photo),
-                                elem.EventDate, elem.DateCreate, elem.Latitude, elem.Longitude, elem.Description));
+                        eEvents.Add(new Common.Event(elem.EventId, elem.LocationCaption, new Common.User(elem.User.UserName, elem.User.UserId, elem.User.Photo), elem.EventDate, elem.DateCreate, elem.Latitude, elem.Longitude, elem.Description));
                     }
                 }
                 await loop(cts.Token);
                 
+                //this.updateProgressBar.IsIndeterminate = false;
                 cts.Cancel();
                 lastString = JsnString;
             } while (true);
@@ -106,6 +124,8 @@ namespace AppStudio.Views
 
         private async Task<int> loop(CancellationToken ct)
         {
+
+
             await Task.Delay(1000);
             return 1;
         }
@@ -126,12 +146,19 @@ namespace AppStudio.Views
                 MainViewModel.SelectedItem = selectedSection.DataContext as ViewModelBase;
             }
         }
+
+        /// <summary>
+        /// Вызывается перед отображением этой страницы во фрейме.
+        /// </summary>
+        /// <param name="e">Данные события, описывающие, каким образом была достигнута эта страница.
+        /// Этот параметр обычно используется для настройки страницы.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             _dataTransferManager = DataTransferManager.GetForCurrentView();
             _dataTransferManager.DataRequested += OnDataRequested;
             _navigationHelper.OnNavigatedTo(e);
             await MainViewModel.LoadDataAsync();
+            
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -157,6 +184,41 @@ namespace AppStudio.Views
             var index = eEvents.IndexOf(elem);
             eEvents.Remove(elem);
             eEvents.Insert(index, elem);
+            
+            /*
+            ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(map);
+
+            foreach (DependencyObject obj in children)
+            {
+                Pushpin pin;
+                try
+                {
+                    pin = (Pushpin)obj;
+                }
+                catch (Exception eeee)
+                {
+                    continue;
+                }
+                if (pin.Content == null)
+                {
+                    pin.Content = "";
+                }
+                if (pin != null)
+                {
+                    string s = pin.Content as String;
+                    if (s != "")
+                    {
+                        pin.Content = "";
+                    }
+                }
+            }
+            //((Pushpin)sender).Content = (((Pushpin)sender).Tag as Event).description;
+            ((Pushpin)sender).Content = (((Pushpin)sender).Tag as Event).MySquareDescriprion;
+
+            tapFlag = true;
+            //pin.Content = (pin.Tag as Event).description;
+            // MessageBox.Show((pin.Tag as Event).description);
+          */
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -178,12 +240,23 @@ namespace AppStudio.Views
 
         private void AppBarButton_Click_2(object sender, RoutedEventArgs e)
         {
-            NavigationServices.NavigateToPage("PicturePage");
+            CurrentUser.GetFriends();
+            //tb.Text = CurrentUser.friends;
+
+            //NavigationServices.NavigateToPage("PicturePage");
         }
 
         private void eventList_ItemClick(object sender, ItemClickEventArgs e)
         {
             NavigationServices.NavigateToPage("EventPage", e.ClickedItem);
         }
+
+        private void Click_2(object sender, TappedRoutedEventArgs e)
+        {
+            NavigationServices.NavigateToPage("PicturePage");
+        }
+
+
+        
     }
 }

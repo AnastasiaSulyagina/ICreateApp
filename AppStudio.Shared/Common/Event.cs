@@ -28,6 +28,7 @@ namespace Common
         public double Longitude { get { return mLongitude; } }
         public string AnchorPoint { get { return mAnchorPoint; } }
         public Visibility isVisible { get { return misVisible; } }
+
         public Geopoint Geopoint
         {
             get

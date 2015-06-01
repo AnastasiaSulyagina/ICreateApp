@@ -6,7 +6,7 @@
     xmlns:commands="using:AppStudio.Commands" xmlns:Common="using:Common">
 
     <!-- MenuListPhotoLeft -->
-    <DataTemplate x:Key="MenuList">
+    <!--<DataTemplate x:Key="MenuList">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="150" />
@@ -32,9 +32,12 @@
 
             <ListView Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True" 
 				commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-				ItemTemplate="{StaticResource MenuItem}" HorizontalAlignment="Left"/>
+				ItemTemplate="{StaticResource MenuItem}" HorizontalAlignment="Left">
+                
+                
+            </ListView>
         </Grid>
-    </DataTemplate>
+    </DataTemplate>-->
 
     <!-- MenuListPhotoLeft Item -->
     <DataTemplate x:Key="MenuItem">

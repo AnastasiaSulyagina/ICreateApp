@@ -8,7 +8,7 @@
     <!-- ListBigPictures -->
     <DataTemplate x:Key="Section2List">
         <Grid>
-            <ListView Margin="0, 0, 60, 0" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"  commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
+            <ListView Margin="0, 0, 60, 0" ItemsSource="{Binding Events}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"  commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                      ItemTemplate="{StaticResource Section2Item}">
             </ListView>
@@ -19,9 +19,6 @@
     <!-- ListBigPictures Item -->
     <DataTemplate x:Key="Section2Item">
         <Grid Margin="0,0,0,10" Height="220">
-            <Grid.Background>
-                <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center"/>
-            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -36,7 +33,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2" />
+                    <TextBlock Grid.Row="0" Style="{StaticResource BoxTitleStyle}" Text="{Binding User.UserId}" MaxLines="2" />
                     <TextBlock Grid.Row="1" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding Description}"/>                    
                 </Grid>
             </Grid>

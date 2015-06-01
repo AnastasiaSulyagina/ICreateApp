@@ -8,11 +8,14 @@ using Windows.UI.Xaml.Controls;
 
 using AppStudio.Data;
 using AppStudio.Services;
+using System.Collections.ObjectModel;
+using Common;
 
 namespace AppStudio.ViewModels
 {
     public class Main1ViewModel : ViewModelBase<MainSchema>
     {
+
         private RelayCommandEx<MainSchema> itemClickCommand;
         public RelayCommandEx<MainSchema> ItemClickCommand
         {
@@ -23,8 +26,7 @@ namespace AppStudio.ViewModels
                     itemClickCommand = new RelayCommandEx<MainSchema>(
                         (item) =>
                         {
-                             //NavigationServices.NavigateToPage("Main1Detail", item);
-                           NavigationServices.NavigateToPage("UserPage", item);
+                            NavigationServices.NavigateToPage("Main1Detail", item);
                         });
                 }
 

@@ -151,6 +151,9 @@
     <Compile Include="Views\DessertsDetailPage.xaml.cs">
       <DependentUpon>DessertsDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Section2DetailPage.xaml.cs">
+      <DependentUpon>Section2DetailPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AboutThisAppPage.xaml">
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DessertsDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Section2DetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

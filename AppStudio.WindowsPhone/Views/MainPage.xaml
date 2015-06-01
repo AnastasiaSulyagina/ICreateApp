@@ -8,23 +8,62 @@
     mc:Ignorable="d"
     xmlns:vm="using:AppStudio.ViewModels"
     xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
-    Background="{StaticResource AppBackground}"
+    xmlns:commands="using:AppStudio.Commands" 
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
     <Grid>
 
-        <Hub x:Name="Container" Background="{StaticResource AppBarBackground}" Margin="0,30,0,0"
+        <Hub x:Name="Container" Grid.Row="1" Background="{StaticResource AppBarBackground}" Margin="0,30,0,-34.666"
              DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeader}">
 
             <HubSection x:Name="MenuSection" Width="440" Header="меню" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" DataContext="{Binding MainViewModel.Section1Model}"
 				d:DataContext="{d:DesignData IsDesignTimeCreatable=true, Source=/Assets/Data/DataSource1DataSource.json, Type=vm:Section1ViewModel}"
-				ContentTemplate="{StaticResource MenuList}" IsHeaderInteractive="{Binding HasMoreItems}" />
+				IsHeaderInteractive="{Binding HasMoreItems}">
+                <DataTemplate >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Margin="0,0,0,0" Grid.Column="0" Style="{StaticResource ImageButtonStyle}" 
+                                    Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" Tapped="Click_2" CommandParameter="{Binding Image}">
+                                    <Viewbox MaxWidth="120" MaxHeight="120">
+                                        <Image Source="{Binding PictureUrl}"/>
+                                    </Viewbox>
+                                </Button>
+                                <TextBlock x:Name="UserName" Margin="10, 10, 10, 10" Text="{Binding UserName}" TextWrapping="Wrap" Grid.Column="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource SubtitleStyle}">
+                                </TextBlock>
+
+
+                            </Grid>
+                        </StackPanel>
+
+                        <ListView Grid.Row="1" ItemsSource="{Binding Items}" SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True" 
+				commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+				ItemTemplate="{StaticResource MenuItem}" HorizontalAlignment="Left">
+
+
+                        </ListView>
+                    </Grid>
+                </DataTemplate>
+
+            </HubSection>
+
+
             <HubSection x:Name="EventsSection" Width="440" Header="список событий"
                         HeaderTemplate="{StaticResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:Name="eventList" HorizontalAlignment="Left"
-                              Height="490" Margin="0,0,0,0" VerticalAlignment="Top" Width="460"
+                              Height="592" Margin="0,0,50,0" VerticalAlignment="Top" Width="460"
                               ItemsSource="{Binding Events}" IsItemClickEnabled="True"
-                              ItemClick="eventList_ItemClick" SelectionMode="None">
+                              ItemClick="eventList_ItemClick">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <!--item-->
@@ -32,7 +71,7 @@
                                     <StackPanel Margin="1,1,1,1" Background="White" Width="350">
                                         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                             <!--авка + юсернэйм-->
-                                            <Image Margin="5,5,0,5" Height="35" Source="{Binding User.Photo}"/>
+                                            <Image Margin="5,5,0,5" Height="35" Source="/Assets/DataImages/nastya.jpg"/>
                                             <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
                                                 <TextBlock Text="{Binding User.UserName}" TextWrapping="Wrap" Margin="5,5,5,5" Foreground="#c0392b" />
                                                 <TextBlock Text="{Binding DateCreate}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#bdc3c7" FontSize="10" />
@@ -78,7 +117,7 @@
                 <DataTemplate>
                     <Maps:MapControl x:Name="myMapControl" MapServiceToken="hHyrNfIWmRCD8m6rGJErqw" ColorScheme="Light" 
                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,60,50"
-                                     ZoomLevel="2">
+                                     ZoomLevel="5">
                         <Maps:MapItemsControl ItemsSource="{Binding Events}">
                             <Maps:MapItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -89,7 +128,7 @@
                                                 <StackPanel Margin="1,1,1,1" Background="White" Width="150">
                                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                                         <!--авка + юсернэйм-->
-                                                        <Image Margin="5,5,0,5" Height="20" Source="{Binding User.Photo}"/>
+                                                        <Image Margin="5,5,0,5" Height="20" Source="/Assets/DataImages/nastya.jpg"/>
                                                         <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
                                                             <TextBlock Text="{Binding User.UserName}" TextWrapping="Wrap" Margin="5,5,5,5" Foreground="#c0392b" FontSize="9"/>
                                                             <TextBlock Text="{Binding DateCreate}" TextWrapping="Wrap" Margin="5,0,5,5" Foreground="#bdc3c7" FontSize="8" />
@@ -121,7 +160,7 @@
         </Hub>
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar  ClosedDisplayMode="Compact" Background="#e6e6e6"
+        <CommandBar  Opacity="0.8" ClosedDisplayMode="Compact" Background="{StaticResource AppBarBackground}"
                      Foreground="{StaticResource AppBarForeground}">
             <AppBarButton x:Uid="SettingsButton" Icon="Setting" DataContext="{Binding MainViewModel}"
                           Command="{Binding MainViewModel.EditPictureCommand}"

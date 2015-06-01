@@ -22,15 +22,41 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!-- Page title -->
+        <!-- Page title<ContentPresenter ContentTemplate="{StaticResource Main1List}" /> -->
         <Border x:Name="HeaderHost" Grid.Row="0" Height="80">
             <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
         </Border>
-        <TextBlock Grid.Row="1" Margin="12,24,0,0" Style="{StaticResource PageTitleStyle}">main</TextBlock>
+        <TextBlock Grid.Row="1" Margin="12,24,0,0" Style="{StaticResource PageTitleStyle}">friends</TextBlock>
 
-        <Grid Grid.Row="2" Margin="14,12.167,10,0" DataContext="{Binding Main1Model}"
-              d:DataContext="{d:DesignData Source=/Assets/Data/MainDataSource.json, Type=vm:Main1ViewModel, IsDesignTimeCreatable=true}">
-            <ContentPresenter ContentTemplate="{StaticResource Main1List}" />
+        <Grid Grid.Row="2" Margin="14,12.167,10,0">
+            <ListView ItemsSource="{Binding MyFriends}" IsItemClickEnabled="True" 
+                ItemClick="_ItemClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="80" Margin="0,0,0,10" Style="{StaticResource BoxGrid}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Photo}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Grid Grid.Column="1">
+                                <Rectangle Width="900" Height="0"/>
+                                <Grid Margin="16,5,16,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="1" Style="{StaticResource BoxTitleStyle}" Text="{Binding UserName}" MaxLines="2"/>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!-- ListHorizontalCards Item -->
+            
         </Grid>
 
     </Grid>
