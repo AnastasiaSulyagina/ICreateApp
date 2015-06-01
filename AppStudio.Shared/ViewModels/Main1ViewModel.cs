@@ -13,7 +13,6 @@ namespace AppStudio.ViewModels
 {
     public class Main1ViewModel : ViewModelBase<MainSchema>
     {
-
         private RelayCommandEx<MainSchema> itemClickCommand;
         public RelayCommandEx<MainSchema> ItemClickCommand
         {
@@ -25,7 +24,7 @@ namespace AppStudio.ViewModels
                         (item) =>
                         {
                              //NavigationServices.NavigateToPage("Main1Detail", item);
-                           NavigationServices.NavigateToPage("Main1Detail", item);
+                           NavigationServices.NavigateToPage("UserPage", item);
                         });
                 }
 

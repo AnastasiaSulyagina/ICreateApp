@@ -1,2 +1,0 @@
-C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Data\AppStudio.Data.csproj;neutral
-C:\Users\Anastasia\Documents\Visual Studio 2013\Projects\ICreate\AppStudio.Windows\AppStudio.Windows.csproj;neutral
